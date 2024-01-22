@@ -22,73 +22,85 @@ const Sidebar = styled.div`
   top: 0;
   width: 250px;
   height: 100%;
-  background: linear-gradient(
+  background-color: #f3f3f3;
+  /* background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
     rgba(255, 255, 255, 0)
   );
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(10px);
-  border-left: 1px solid #cccccc;
+  -webkit-backdrop-filter: blur(10px); */
+  border-left: 1px solid #494949;
   padding: 20px 0; // Add padding at the top and bottom
   transition: right 0.3s ease;
   z-index: 9;
   @media screen and (max-width: 1080px) {
-    width: 250px;
+    width: 220px;
   }
   @media screen and (max-width: 768px) {
-    width: 200px;
   }
   @media screen and (max-width: 480px) {
-    width: 150px;
   }
 `;
 
-const SlideOpenButton = styled.button`
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
+const CloseIcon = styled(FaTimes)`
+  color: #494949;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s;
-  z-index: 10;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  z-index: 11;
 
   &:hover {
-    background-color: #388e3c;
+    color: #cccccc;
+  }
+  @media screen and (max-width: 1080px) {
+    top: 10px;
+    left: 5px;
+  }
+`;
+
+const ButtonsContainer = styled.div`
+  height: 90%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid #494949;
+  @media screen and (max-width: 480px) {
+    padding: 5px;
   }
 `;
 
 const IconButton = styled.div`
   position: fixed;
-  top: 10px;
-  left: 10px;
-  color: #4caf50;
+  top: 20px;
+  left: 20px;
+  color: #cccccc;
+  /* color: #4caf50; */
   cursor: pointer;
   z-index: 10;
 
   &:hover {
-    color: #388e3c;
+    color: #494949;
+  }
+  @media screen and (max-width: 480px) {
   }
 `;
 
 const CreateButton = styled.button`
   padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #eeeeee;
+  /* background-color: #4caf50; */
+  color: #494949;
   border: none;
   border-radius: 5px;
+  border: 1px solid #494949;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
   transition: background-color 0.3s;
   z-index: 10;
-
   &:hover {
-    background-color: #388e3c;
+    background-color: #cccccc;
   }
 `;
 
@@ -109,9 +121,11 @@ const App = () => {
       <IconButton onClick={toggleSidebar}>
         {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </IconButton>
-
       <Sidebar isOpen={isSidebarOpen}>
-        <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
+        <CloseIcon size={24} onClick={toggleSidebar} />
+        <ButtonsContainer>
+          <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
+        </ButtonsContainer>
       </Sidebar>
       <Gallery />
       {showForm && <BabyForm toggleForm={toggleForm} showForm={showForm} />}

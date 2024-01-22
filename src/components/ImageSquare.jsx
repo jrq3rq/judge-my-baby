@@ -8,7 +8,7 @@ const Square = styled.div`
   padding-bottom: 100%; // Makes the div square
   position: relative;
   cursor: pointer;
-  border: 1px solid #ccc; // Placeholder border
+  border: 1px solid #494949; // Placeholder border
 
   &:hover {
     opacity: 0.7;

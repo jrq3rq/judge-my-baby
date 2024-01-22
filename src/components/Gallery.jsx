@@ -9,11 +9,10 @@ const GalleryContainer = styled.div`
   grid-gap: 16px;
   padding: 16px;
   min-height: calc(100vh - 120px);
-  margin: 30px 30px 30px 30px;
+  margin: 30px 40px 30px 40px;
 
   @media (max-width: 1024px) {
     margin: 20px 20px 20px 20px;
-
     grid-template-columns: repeat(3, 1fr); // Medium screens - 3 columns
   }
 
