@@ -23,11 +23,15 @@ const GalleryContainer = styled.div`
   }
 `;
 
-const Gallery = () => {
+const Gallery = ({ babyData, onImageClick }) => {
   return (
     <GalleryContainer>
-      {Array.from({ length: 12 }).map((_, index) => (
-        <ImageSquare key={index} />
+      {babyData.map((baby, index) => (
+        <ImageSquare
+          key={index}
+          baby={baby}
+          onClick={() => onImageClick(baby)}
+        />
       ))}
     </GalleryContainer>
   );

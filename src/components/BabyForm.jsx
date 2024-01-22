@@ -103,25 +103,61 @@ const SecondaryButton = styled(Button)`
   }
 `;
 
-const BabyForm = ({ toggleForm, showForm }) => {
+const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
   const [character, setCharacter] = useState("");
+  const [projectName, setProjectName] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectURL, setProjectURL] = useState("");
   const [targetAudience, setTargetAudience] = useState("");
+  const [marketPotential, setMarketPotential] = useState("");
+  const [problemSolution, setProblemSolution] = useState("");
+  const [uniqueDifferentiators, setUniqueDifferentiators] = useState("");
   const [businessModel, setBusinessModel] = useState("");
+  const [specificFeedback, setSpecificFeedback] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implement your form submission logic here
-    // This should include sending the selected character along with other form data
-    console.log("Form submitted with character: ", character);
+    const formData = {
+      character,
+      projectName,
+      projectDescription,
+      projectURL,
+      targetAudience,
+      marketPotential,
+      problemSolution,
+      uniqueDifferentiators,
+      businessModel,
+      specificFeedback,
+    };
+    if (typeof onFormSubmit === "function") {
+      onFormSubmit(formData);
+    }
+    toggleForm();
   };
 
   return (
     <ModalBackground show={showForm}>
       <ModalContainer>
         <FormContainer onSubmit={handleSubmit}>
-          <Input type="text" placeholder="Project Name" required />
-          <Textarea placeholder="Project Description" required />
-          <Input type="url" placeholder="Project URL" />
+          <Input
+            type="text"
+            placeholder="Project Name"
+            value={projectName}
+            onChange={(e) => setProjectName(e.target.value)}
+            required
+          />
+          <Textarea
+            placeholder="Project Description"
+            value={projectDescription}
+            onChange={(e) => setProjectDescription(e.target.value)}
+            required
+          />
+          <Input
+            type="url"
+            placeholder="Project URL"
+            value={projectURL}
+            onChange={(e) => setProjectURL(e.target.value)}
+          />
           <Select
             onChange={(e) => setTargetAudience(e.target.value)}
             value={targetAudience}
@@ -145,9 +181,23 @@ const BabyForm = ({ toggleForm, showForm }) => {
             <option value="Environmentalists">Environmentalists</option>
             <option value="Others">Others (Niche or Specific)</option>
           </Select>
-          <Input type="text" placeholder="Market Potential" />
-          <Textarea placeholder="Problem & Solution" />
-          <Textarea placeholder="Unique Differentiators" />
+          <Input
+            type="text"
+            placeholder="Market Potential"
+            value={marketPotential}
+            onChange={(e) => setMarketPotential(e.target.value)}
+          />
+          <Textarea
+            placeholder="Problem & Solution"
+            value={problemSolution}
+            onChange={(e) => setProblemSolution(e.target.value)}
+          />
+
+          <Textarea
+            placeholder="Unique Differentiators"
+            value={uniqueDifferentiators}
+            onChange={(e) => setUniqueDifferentiators(e.target.value)}
+          />
           <Select
             onChange={(e) => setBusinessModel(e.target.value)}
             value={businessModel}
@@ -165,7 +215,11 @@ const BabyForm = ({ toggleForm, showForm }) => {
             <option value="Dropshipping">Dropshipping</option>
             <option value="Others">Others (Unique or Specific)</option>
           </Select>
-          <Textarea placeholder="Specific Feedback Requested" />
+          <Textarea
+            placeholder="Specific Feedback Requested"
+            value={specificFeedback}
+            onChange={(e) => setSpecificFeedback(e.target.value)}
+          />
           <Select
             onChange={(e) => setCharacter(e.target.value)}
             value={character}
@@ -200,7 +254,7 @@ const BabyForm = ({ toggleForm, showForm }) => {
           </Select>
 
           <ButtonContainer>
-            <PrimaryButton type="submit">Submit Creation</PrimaryButton>
+            <PrimaryButton type="submit">Upload Creation</PrimaryButton>
             <SecondaryButton onClick={toggleForm}>Close</SecondaryButton>
           </ButtonContainer>
         </FormContainer>

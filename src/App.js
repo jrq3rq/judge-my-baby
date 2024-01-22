@@ -107,7 +107,17 @@ const CreateButton = styled.button`
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showForm, setShowForm] = useState(false); // State for showing the form
+  const [babyData, setBabyData] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
 
+  const handleFormSubmit = (formData) => {
+    setBabyData([...babyData, formData]);
+    setShowForm(false); // Close the form after submission
+  };
+
+  const handleClick = (baby) => {
+    // Logic to handle click (e.g., open modal with baby data)
+  };
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -121,14 +131,23 @@ const App = () => {
       <IconButton onClick={toggleSidebar}>
         {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </IconButton>
+
       <Sidebar isOpen={isSidebarOpen}>
         <CloseIcon size={24} onClick={toggleSidebar} />
         <ButtonsContainer>
           <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
         </ButtonsContainer>
       </Sidebar>
-      <Gallery />
-      {showForm && <BabyForm toggleForm={toggleForm} showForm={showForm} />}
+
+      {showForm && (
+        <BabyForm
+          onFormSubmit={handleFormSubmit}
+          showForm={showForm}
+          toggleForm={toggleForm}
+        />
+      )}
+
+      <Gallery babyData={babyData} onImageClick={handleClick} />
     </AppContainer>
   );
 };
