@@ -21,6 +21,26 @@ const FormContainer = styled.form`
   z-index: 10;
 `;
 
+const ModalBackground = styled.div`
+  display: ${({ show }) => (show ? "flex" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); // Dimmed background
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+`;
+
+const ModalContainer = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+`;
+
 const Input = styled.input`
   margin-bottom: 10px;
   padding: 10px;
@@ -83,8 +103,10 @@ const SecondaryButton = styled(Button)`
   }
 `;
 
-const BabyForm = ({ toggleForm }) => {
+const BabyForm = ({ toggleForm, showForm }) => {
   const [character, setCharacter] = useState("");
+  const [targetAudience, setTargetAudience] = useState("");
+  const [businessModel, setBusinessModel] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -94,43 +116,96 @@ const BabyForm = ({ toggleForm }) => {
   };
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
-      <Input type="text" placeholder="Project Name" required />
-      <Textarea placeholder="Project Description" required />
-      <Input type="url" placeholder="Project URL" />
-      <Select onChange={(e) => setCharacter(e.target.value)} value={character}>
-        <option value="">Select your baby archetype</option>
-        <option value="Innocent">Innocent - Pure, Ethical, Trusted</option>
-        <option value="Everyman">
-          Everyman - Relatable, Down-to-Earth, Real
-        </option>
-        <option value="Hero">Hero - Bold, Courageous, Strong</option>
-        <option value="Caregiver">
-          Caregiver - Nurturing, Supportive, Compassionate
-        </option>
-        <option value="Explorer">
-          Explorer - Adventurous, Independent, Pioneer
-        </option>
-        <option value="Rebel">Rebel - Disruptive, Edgy, Revolutionary</option>
-        <option value="Lover">Lover - Passionate, Sensual, Intimate</option>
-        <option value="Creator">
-          Creator - Innovative, Imaginative, Artistic
-        </option>
-        <option value="Jester">Joker - Fun, Humorous, Light-Hearted</option>
-        <option value="Sage">Sage - Wise, Knowledgeable, Advisor</option>
-        <option value="Magician">
-          Magician - Transformative, Visionary, Charismatic
-        </option>
-        <option value="Ruler">
-          Ruler - Authoritative, Influential, Powerful
-        </option>
-      </Select>
+    <ModalBackground show={showForm}>
+      <ModalContainer>
+        <FormContainer onSubmit={handleSubmit}>
+          <Input type="text" placeholder="Project Name" required />
+          <Textarea placeholder="Project Description" required />
+          <Input type="url" placeholder="Project URL" />
+          <Select
+            onChange={(e) => setTargetAudience(e.target.value)}
+            value={targetAudience}
+          >
+            <option value="">Select Target Audience</option>
+            <option value="General Consumer">General Consumer</option>
+            <option value="Businesses/Enterprises">
+              Businesses/Enterprises
+            </option>
+            <option value="Tech Enthusiasts">Tech Enthusiasts</option>
+            <option value="Students/Educational">Students/Educational</option>
+            <option value="Healthcare Professionals">
+              Healthcare Professionals
+            </option>
+            <option value="Creative Professionals">
+              Creative Professionals
+            </option>
+            <option value="Seniors">Seniors</option>
+            <option value="Parents/Families">Parents/Families</option>
+            <option value="Youth/Teens">Youth/Teens</option>
+            <option value="Environmentalists">Environmentalists</option>
+            <option value="Others">Others (Niche or Specific)</option>
+          </Select>
+          <Input type="text" placeholder="Market Potential" />
+          <Textarea placeholder="Problem & Solution" />
+          <Textarea placeholder="Unique Differentiators" />
+          <Select
+            onChange={(e) => setBusinessModel(e.target.value)}
+            value={businessModel}
+          >
+            <option value="">Select Business Model</option>
+            <option value="Product Sales">Product Sales</option>
+            <option value="Service Provider">Service Provider</option>
+            <option value="Subscription-Based">Subscription-Based</option>
+            <option value="Freemium Model">Freemium Model</option>
+            <option value="Advertising-Based">Advertising-Based</option>
+            <option value="Affiliate Marketing">Affiliate Marketing</option>
+            <option value="Direct Sales">Direct Sales</option>
+            <option value="E-commerce">E-commerce</option>
+            <option value="Franchise">Franchise</option>
+            <option value="Dropshipping">Dropshipping</option>
+            <option value="Others">Others (Unique or Specific)</option>
+          </Select>
+          <Textarea placeholder="Specific Feedback Requested" />
+          <Select
+            onChange={(e) => setCharacter(e.target.value)}
+            value={character}
+          >
+            <option value="">Select your baby archetype</option>
+            <option value="Innocent">Innocent - Pure, Ethical, Trusted</option>
+            <option value="Everyman">
+              Everyman - Relatable, Down-to-Earth, Real
+            </option>
+            <option value="Hero">Hero - Bold, Courageous, Strong</option>
+            <option value="Caregiver">
+              Caregiver - Nurturing, Supportive, Compassionate
+            </option>
+            <option value="Explorer">
+              Explorer - Adventurous, Independent, Pioneer
+            </option>
+            <option value="Rebel">
+              Rebel - Disruptive, Edgy, Revolutionary
+            </option>
+            <option value="Lover">Lover - Passionate, Sensual, Intimate</option>
+            <option value="Creator">
+              Creator - Innovative, Imaginative, Artistic
+            </option>
+            <option value="Jester">Joker - Fun, Humorous, Light-Hearted</option>
+            <option value="Sage">Sage - Wise, Knowledgeable, Advisor</option>
+            <option value="Magician">
+              Magician - Transformative, Visionary, Charismatic
+            </option>
+            <option value="Ruler">
+              Ruler - Authoritative, Influential, Powerful
+            </option>
+          </Select>
 
-      <ButtonContainer>
-        <PrimaryButton type="submit">Submit Creation</PrimaryButton>
-        <SecondaryButton onClick={toggleForm}>Close</SecondaryButton>
-      </ButtonContainer>
-    </FormContainer>
+          <ButtonContainer>
+            <PrimaryButton type="submit">Submit Creation</PrimaryButton>
+            <SecondaryButton onClick={toggleForm}>Close</SecondaryButton>
+          </ButtonContainer>
+        </FormContainer>
+      </ModalContainer>
+    </ModalBackground>
   );
 };
 

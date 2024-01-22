@@ -114,7 +114,7 @@ const App = () => {
         <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
       </Sidebar>
       <Gallery />
-      {showForm && <BabyForm toggleForm={toggleForm} />}
+      {showForm && <BabyForm toggleForm={toggleForm} showForm={showForm} />}
     </AppContainer>
   );
 };
