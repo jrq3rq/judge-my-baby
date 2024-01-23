@@ -25,15 +25,6 @@ const GalleryContainer = styled.div`
 const Gallery = ({ babyData, onImageClick }) => {
   return (
     <GalleryContainer>
-<<<<<<< Updated upstream
-      {babyData.map((baby, index) => (
-        <ImageSquare
-          key={index}
-          baby={baby}
-          onClick={() => onImageClick(baby)}
-        />
-      ))}
-=======
       {Array.isArray(babyData) &&
         babyData.map((baby, index) => (
           <ImageSquare
@@ -42,7 +33,6 @@ const Gallery = ({ babyData, onImageClick }) => {
             onClick={() => onImageClick && onImageClick(baby)}
           />
         ))}
->>>>>>> Stashed changes
     </GalleryContainer>
   );
 };
