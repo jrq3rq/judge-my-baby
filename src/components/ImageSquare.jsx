@@ -58,6 +58,7 @@ const Square = styled.div`
   }
 `;
 
+<<<<<<< Updated upstream
 const Title = styled.h2`
   font-size: 1.5em; /* Title font size */
   text-transform: uppercase; /* Uppercase title */
@@ -97,6 +98,19 @@ const ImageSquare = ({ baby }) => {
       <InfoText>Unique Differentiators: {baby.uniqueDifferentiators}</InfoText>
       <InfoText>Business Model: {baby.businessModel}</InfoText>
       <InfoText>Feedback Requested: {baby.specificFeedback}</InfoText>
+=======
+const ImageSquare = ({ baby, onClick }) => {
+  const { name, illustrationUrl } = baby;
+
+  const handleClick = () => {
+    // Implement your logic to handle click here
+    console.log("Square clicked!");
+  };
+
+  return (
+    <Square onClick={onClick}>
+      <img src={illustrationUrl} alt={name} />
+>>>>>>> Stashed changes
     </Square>
   );
 };

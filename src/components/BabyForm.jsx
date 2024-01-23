@@ -113,6 +113,7 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
   const [problemSolution, setProblemSolution] = useState("");
   const [uniqueDifferentiators, setUniqueDifferentiators] = useState("");
   const [businessModel, setBusinessModel] = useState("");
+<<<<<<< Updated upstream
   const [specificFeedback, setSpecificFeedback] = useState("");
 
   const handleSubmit = (e) => {
@@ -133,6 +134,18 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
       onFormSubmit(formData);
     }
     toggleForm();
+=======
+  const [babyData, setBabyData] = useState([]);
+
+  const handleFormSubmit = (formData) => {
+    setBabyData([...babyData, formData]);
+  };
+  const handleSubmit = (e, props) => {
+    const formData = {
+      // Collect data from form fields
+    };
+    props.onFormSubmit(formData);
+>>>>>>> Stashed changes
   };
 
   return (

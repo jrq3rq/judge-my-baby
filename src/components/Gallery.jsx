@@ -1,5 +1,4 @@
-// components/Gallery.jsx
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ImageSquare from "./ImageSquare";
 
@@ -26,6 +25,7 @@ const GalleryContainer = styled.div`
 const Gallery = ({ babyData, onImageClick }) => {
   return (
     <GalleryContainer>
+<<<<<<< Updated upstream
       {babyData.map((baby, index) => (
         <ImageSquare
           key={index}
@@ -33,6 +33,16 @@ const Gallery = ({ babyData, onImageClick }) => {
           onClick={() => onImageClick(baby)}
         />
       ))}
+=======
+      {Array.isArray(babyData) &&
+        babyData.map((baby, index) => (
+          <ImageSquare
+            key={index}
+            baby={baby}
+            onClick={() => onImageClick && onImageClick(baby)}
+          />
+        ))}
+>>>>>>> Stashed changes
     </GalleryContainer>
   );
 };

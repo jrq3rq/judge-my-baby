@@ -108,7 +108,21 @@ const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showForm, setShowForm] = useState(false); // State for showing the form
   const [babyData, setBabyData] = useState([]);
+<<<<<<< Updated upstream
   const [submissions, setSubmissions] = useState([]);
+=======
+  const [selectedBaby, setSelectedBaby] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleClick = (baby) => {
+    setSelectedBaby(baby);
+    setIsModalOpen(true);
+  };
+
+  const handleFormSubmit = (formData) => {
+    setBabyData([...babyData, formData]);
+  };
+>>>>>>> Stashed changes
 
   const handleFormSubmit = (formData) => {
     setBabyData([...babyData, formData]);
@@ -138,6 +152,7 @@ const App = () => {
           <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
         </ButtonsContainer>
       </Sidebar>
+<<<<<<< Updated upstream
 
       {showForm && (
         <BabyForm
@@ -148,6 +163,16 @@ const App = () => {
       )}
 
       <Gallery babyData={babyData} onImageClick={handleClick} />
+=======
+      <Gallery babyData={babyData} onImageClick={handleClick} />
+      {showForm && (
+        <BabyForm
+          onFormSubmit={handleFormSubmit}
+          toggleForm={toggleForm}
+          showForm={showForm}
+        />
+      )}
+>>>>>>> Stashed changes
     </AppContainer>
   );
 };
