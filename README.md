@@ -11,7 +11,6 @@ Judge-My-Baby
 │ │ └── images # Static images, icons, etc.
 │ ├── pages
 │ │ ├── BabyDetailPage.jsx # Page to display a specific baby illustration.
-
 │ │ └── ...
 │ ├── components
 │ │ ├── BabyForm.jsx
