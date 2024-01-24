@@ -1,5 +1,43 @@
 # Judge My Baby
 
+```markdown
+Judge-My-Baby
+├── public
+│ └── index.html
+├── src
+│ ├── components
+│ │ ├── BabyForm.jsx
+│ │ ├── Gallery.jsx
+│ │ ├── ImageSquare.jsx
+│ │ └── ...
+│ ├── redux
+│ │ ├── actions
+│ │ │ └── babyActions.js # Redux actions related to baby data management.
+│ │ ├── reducers
+│ │ │ ├── babyReducer.js # Reducer for baby data.
+│ │ │ └── index.js # Combine all reducers.
+│ │ └── store.js # Redux store configuration.
+│ ├── services
+│ │ └── api.js # Services for external API calls, e.g., to Firestore.
+│ ├── utils
+│ │ └── helpers.js # Utility functions, e.g., score-to-image mapping.
+│ ├── constants
+│ │ └── actionTypes.js # Define action type constants for Redux.
+│ ├── assets
+│ │ ├── styles
+│ │ │ └── globalStyles.js # Global styled-components.
+│ │ └── images # Static images, icons, etc.
+│ ├── App.js
+│ ├── index.js
+│ └── ...
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── .env
+├── README.md
+└── index.js
+```
+
 ## Project/Product Overview
 
 **Name of Project/Product:** Judge My Baby
@@ -43,3 +81,24 @@
 - **User Retention:** Keeping the user base active and engaged over time poses a challenge.
 - **Quality Control:** Maintaining a high standard for feedback and user interaction.
 - **Market Trends:** Navigating changes in the creator economy and user engagement habits.
+
+<!-- ```markdown
+Judge-My-Baby
+├── public
+│ └── index.html
+├── src
+│ ├── components
+│ │ ├── BabyForm.jsx
+│ │ ├── Gallery.jsx
+│ │ ├── ImageSquare.jsx
+│ │ └── ...
+│ ├── App.js
+│ ├── index.js
+│ └── ...
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── .env
+├── README.md
+└── index.js
+``` -->
