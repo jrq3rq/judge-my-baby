@@ -5,6 +5,14 @@ Judge-My-Baby
 ├── public
 │ └── index.html
 ├── src
+│ ├── assets
+│ │ ├── styles
+│ │ │ └── globalStyles.js # Global styled-components.
+│ │ └── images # Static images, icons, etc.
+│ ├── pages
+│ │ ├── BabyDetailPage.jsx # Page to display a specific baby illustration.
+
+│ │ └── ...
 │ ├── components
 │ │ ├── BabyForm.jsx
 │ │ ├── Gallery.jsx
@@ -23,10 +31,6 @@ Judge-My-Baby
 │ │ └── helpers.js # Utility functions, e.g., score-to-image mapping.
 │ ├── constants
 │ │ └── actionTypes.js # Define action type constants for Redux.
-│ ├── assets
-│ │ ├── styles
-│ │ │ └── globalStyles.js # Global styled-components.
-│ │ └── images # Static images, icons, etc.
 │ ├── App.js
 │ ├── index.js
 │ └── ...

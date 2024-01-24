@@ -21,18 +21,35 @@ const GalleryContainer = styled.div`
     grid-template-columns: repeat(2, 1fr); // Small screens - 2 columns
   }
 `;
+const PlaceholderSquare = styled.div`
+  background-color: transparent; // No background color
+  border: 1px dashed #ccc; // Dashed border to indicate a placeholder
+  border-radius: 5px;
+  aspect-ratio: 1 / 1; // Maintain square aspect ratio
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const Gallery = ({ babyData, onImageClick }) => {
+  const numPlaceholders = 12;
+
   return (
     <GalleryContainer>
       {Array.isArray(babyData) &&
-        babyData.map((baby, index) => (
-          <ImageSquare
-            key={index}
-            baby={baby}
-            onClick={() => onImageClick && onImageClick(baby)}
-          />
-        ))}
+        [...Array(numPlaceholders)].map((_, index) => {
+          const baby = babyData[index];
+          return baby ? (
+            <ImageSquare
+              key={index}
+              baby={baby}
+              onClick={() => onImageClick && onImageClick(baby)}
+            />
+          ) : (
+            <PlaceholderSquare key={index} />
+          );
+        })}
     </GalleryContainer>
   );
 };

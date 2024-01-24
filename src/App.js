@@ -16,20 +16,19 @@ const Sidebar = styled.div`
   flex-direction: column; // Align items vertically
   align-items: center; // Center items horizontally
   gap: 15px; // Add a gap between items
-
   position: fixed;
   right: ${({ isOpen }) => (isOpen ? "0" : "-250px")};
   top: 0;
   width: 250px;
   height: 100%;
-  background-color: #f3f3f3;
-  /* background: linear-gradient(
+  /* background-color: #f3f3f3; */
+  background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
     rgba(255, 255, 255, 0)
   );
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(10px); */
+  -webkit-backdrop-filter: blur(10px);
   border-left: 1px solid #494949;
   padding: 20px 0; // Add padding at the top and bottom
   transition: right 0.3s ease;
@@ -64,6 +63,7 @@ const ButtonsContainer = styled.div`
   height: 90%;
   padding: 10px;
   border-radius: 10px;
+  /* background-color: pink; */
   background-color: #ffffff;
   border: 1px solid #494949;
   @media screen and (max-width: 480px) {
@@ -164,3 +164,63 @@ const App = () => {
 };
 
 export default App;
+
+// import React, { useState } from "react";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import styled from "styled-components";
+// import Gallery from "./components/Gallery";
+// import BabyForm from "./components/BabyForm";
+// import BabyDetailPage from "./pages/BabyDetailPage"; // Import BabyDetailPage
+// import { FaBars, FaTimes } from "react-icons/fa";
+
+// const App = () => {
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const [showForm, setShowForm] = useState(false);
+//   const [babyData, setBabyData] = useState([]);
+
+//   const handleFormSubmit = (formData) => {
+//     setBabyData([...babyData, formData]);
+//     setShowForm(false);
+//   };
+
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
+
+//   const toggleForm = () => {
+//     setShowForm(!showForm);
+//   };
+
+//   return (
+//     <Router>
+//       <AppContainer>
+//         <IconButton onClick={toggleSidebar}>
+//           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+//         </IconButton>
+
+//         <Sidebar isOpen={isSidebarOpen}>
+//           <CloseIcon size={24} onClick={toggleSidebar} />
+//           <ButtonsContainer>
+//             <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
+//           </ButtonsContainer>
+//         </Sidebar>
+
+//         {showForm && (
+//           <BabyForm
+//             onFormSubmit={handleFormSubmit}
+//             showForm={showForm}
+//             toggleForm={toggleForm}
+//           />
+//         )}
+
+//         <Routes>
+//           <Route path="/" element={<Gallery babyData={babyData} />} />
+//           <Route path="/baby/:id" element={<BabyDetailPage />} />
+//           {/* Add other routes as needed */}
+//         </Routes>
+//       </AppContainer>
+//     </Router>
+//   );
+// };
+
+// export default App;
