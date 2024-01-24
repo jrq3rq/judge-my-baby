@@ -1,6 +1,8 @@
 // components/ImageSquare.jsx
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import BabyForm from "./BabyForm";
+import ImageSquareModal from "./ImageSquareModal";
 
 // const Image = styled.img`
 //   max-width: 100%;
@@ -75,29 +77,42 @@ const Image = styled.img`
 `;
 
 const ImageSquare = ({ baby }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   //   console.log(baby);
   return (
-    <Square>
-      {baby.illustrationUrl && (
-        <Image src={baby.illustrationUrl} alt={baby.character} />
-      )}
-      <ProjectName>{baby.projectName}</ProjectName>
-      <Description title={baby.projectDescription}>
-        {baby.projectDescription}
-      </Description>
-      {baby.projectURL && (
-        <Link href={baby.projectURL} target="_blank">
-          Visit Project
-        </Link>
-      )}
-      <InfoText>Character: {baby.character}</InfoText>
-      <InfoText>Target Audience: {baby.targetAudience}</InfoText>
-      <InfoText>Market Potential: {baby.marketPotential}</InfoText>
-      <InfoText>Problem/Solution: {baby.problemSolution}</InfoText>
-      <InfoText>Unique Differentiators: {baby.uniqueDifferentiators}</InfoText>
-      <InfoText>Business Model: {baby.businessModel}</InfoText>
-      <InfoText>Feedback Requested: {baby.specificFeedback}</InfoText>
-    </Square>
+    <>
+      <Square>
+        {baby.illustrationUrl && (
+          <Image src={baby.illustrationUrl} alt={baby.character} />
+        )}
+        <ProjectName>{baby.projectName}</ProjectName>
+        <Description title={baby.projectDescription}>
+          {baby.projectDescription}
+        </Description>
+        {baby.projectURL && (
+          <Link href={baby.projectURL} target="_blank">
+            Visit Project
+          </Link>
+        )}
+        <InfoText>Character: {baby.character}</InfoText>
+        <InfoText>Target Audience: {baby.targetAudience}</InfoText>
+        <InfoText>Market Potential: {baby.marketPotential}</InfoText>
+        <InfoText>Problem/Solution: {baby.problemSolution}</InfoText>
+        <InfoText>
+          Unique Differentiators: {baby.uniqueDifferentiators}
+        </InfoText>
+        <InfoText>Business Model: {baby.businessModel}</InfoText>
+        <InfoText>Feedback Requested: {baby.specificFeedback}</InfoText>
+        <button onClick={() => setIsModalOpen(true)}>View Details</button>
+      </Square>
+
+      <ImageSquareModal
+        show={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        // Pass any other props you might need
+      />
+    </>
   );
 };
 
