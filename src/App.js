@@ -29,7 +29,8 @@ const Sidebar = styled.div`
   );
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(10px);
-  border-left: 1px solid #494949;
+  border-left: 1px solid #ccc;
+  /* border-left: 1px solid #494949; */
   padding: 20px 0; // Add padding at the top and bottom
   transition: right 0.3s ease;
   z-index: 9;
@@ -65,7 +66,8 @@ const ButtonsContainer = styled.div`
   border-radius: 10px;
   /* background-color: pink; */
   background-color: #ffffff;
-  border: 1px solid #494949;
+  border: 1px solid #ccc;
+  /* border: 1px solid #494949; */
   @media screen and (max-width: 480px) {
     padding: 5px;
   }
@@ -94,7 +96,8 @@ const CreateButton = styled.button`
   color: #494949;
   border: none;
   border-radius: 5px;
-  border: 1px solid #494949;
+  border: 1px solid #ccc;
+  /* border: 1px solid #494949; */
   cursor: pointer;
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
   transition: background-color 0.3s;
@@ -139,10 +142,9 @@ const App = () => {
       <Sidebar isOpen={isSidebarOpen}>
         <CloseIcon size={24} onClick={toggleSidebar} />
         <ButtonsContainer>
-          <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
+          <CreateButton>Dummy Button</CreateButton>
         </ButtonsContainer>
       </Sidebar>
-
       {showForm && (
         <BabyForm
           onFormSubmit={handleFormSubmit}
@@ -150,77 +152,13 @@ const App = () => {
           toggleForm={toggleForm}
         />
       )}
-
-      <Gallery babyData={babyData} onImageClick={handleClick} />
-      {showForm && (
-        <BabyForm
-          onFormSubmit={handleFormSubmit}
-          toggleForm={toggleForm}
-          showForm={showForm}
-        />
-      )}
+      <Gallery
+        babyData={babyData}
+        onImageClick={handleClick}
+        onButtonClick={toggleForm}
+      />
     </AppContainer>
   );
 };
 
 export default App;
-
-// import React, { useState } from "react";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import styled from "styled-components";
-// import Gallery from "./components/Gallery";
-// import BabyForm from "./components/BabyForm";
-// import BabyDetailPage from "./pages/BabyDetailPage"; // Import BabyDetailPage
-// import { FaBars, FaTimes } from "react-icons/fa";
-
-// const App = () => {
-//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-//   const [showForm, setShowForm] = useState(false);
-//   const [babyData, setBabyData] = useState([]);
-
-//   const handleFormSubmit = (formData) => {
-//     setBabyData([...babyData, formData]);
-//     setShowForm(false);
-//   };
-
-//   const toggleSidebar = () => {
-//     setIsSidebarOpen(!isSidebarOpen);
-//   };
-
-//   const toggleForm = () => {
-//     setShowForm(!showForm);
-//   };
-
-//   return (
-//     <Router>
-//       <AppContainer>
-//         <IconButton onClick={toggleSidebar}>
-//           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-//         </IconButton>
-
-//         <Sidebar isOpen={isSidebarOpen}>
-//           <CloseIcon size={24} onClick={toggleSidebar} />
-//           <ButtonsContainer>
-//             <CreateButton onClick={toggleForm}>Create Your Baby</CreateButton>
-//           </ButtonsContainer>
-//         </Sidebar>
-
-//         {showForm && (
-//           <BabyForm
-//             onFormSubmit={handleFormSubmit}
-//             showForm={showForm}
-//             toggleForm={toggleForm}
-//           />
-//         )}
-
-//         <Routes>
-//           <Route path="/" element={<Gallery babyData={babyData} />} />
-//           <Route path="/baby/:id" element={<BabyDetailPage />} />
-//           {/* Add other routes as needed */}
-//         </Routes>
-//       </AppContainer>
-//     </Router>
-//   );
-// };
-
-// export default App;
