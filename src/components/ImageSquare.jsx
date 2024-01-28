@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BabyForm from "./BabyForm";
 import ImageSquareModal from "./ImageSquareModal";
+import RatingIcons from "./RatingIcons";
 
 // const Image = styled.img`
 //   max-width: 100%;
@@ -14,6 +15,7 @@ const ProjectName = styled.div`
   text-align: center;
   font-weight: bold;
   margin-top: 20px;
+  color: green;
 `;
 
 const InfoText = styled.div`
@@ -25,9 +27,19 @@ const InfoText = styled.div`
 const Link = styled.a`
   color: #0066cc;
   text-decoration: none;
+  padding: 20px 20px;
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const BabyIMG = styled.div`
+  height: 150px;
+  width: 150px;
+  border: 1px solid #494949; // Border color
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
 `;
 
 const Description = styled(InfoText)`
@@ -76,26 +88,34 @@ const Image = styled.img`
   border-radius: 10px; /* Rounded corners for the image */
 `;
 
+const StyledButton = styled.button``;
+
 const ImageSquare = ({ baby }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   //   console.log(baby);
+  const [rating, setRating] = useState(0); // Initial rating state
+
+  const handleRatingChange = (newRating) => {
+    setRating(newRating); // Update the rating state
+  };
   return (
     <>
       <Square>
-        {baby.illustrationUrl && (
+        <BabyIMG>{baby.projectName}</BabyIMG>
+        {/* {baby.illustrationUrl && (
           <Image src={baby.illustrationUrl} alt={baby.character} />
-        )}
-        <ProjectName>{baby.projectName}</ProjectName>
-        <Description title={baby.projectDescription}>
+        )} */}
+        {/* <ProjectName>{baby.projectName}</ProjectName> */}
+        {/* <Description title={baby.projectDescription}>
           {baby.projectDescription}
-        </Description>
-        {baby.projectURL && (
+        </Description> */}
+        {/* {baby.projectURL && (
           <Link href={baby.projectURL} target="_blank">
             Visit Project
           </Link>
-        )}
-        <InfoText>Character: {baby.character}</InfoText>
+        )} */}
+        {/* <InfoText>Character: {baby.character}</InfoText>
         <InfoText>Target Audience: {baby.targetAudience}</InfoText>
         <InfoText>Market Potential: {baby.marketPotential}</InfoText>
         <InfoText>Problem/Solution: {baby.problemSolution}</InfoText>
@@ -103,8 +123,11 @@ const ImageSquare = ({ baby }) => {
           Unique Differentiators: {baby.uniqueDifferentiators}
         </InfoText>
         <InfoText>Business Model: {baby.businessModel}</InfoText>
-        <InfoText>Feedback Requested: {baby.specificFeedback}</InfoText>
-        <button onClick={() => setIsModalOpen(true)}>View Details</button>
+        <InfoText>Feedback Requested: {baby.specificFeedback}</InfoText> */}
+        <RatingIcons value={rating} onChange={handleRatingChange} />
+        <StyledButton onClick={() => setIsModalOpen(true)}>
+          Judge The Baby
+        </StyledButton>
       </Square>
 
       <ImageSquareModal

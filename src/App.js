@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Gallery from "./components/Gallery";
 import BabyForm from "./components/BabyForm";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const AppContainer = styled.div`
   margin: 0;

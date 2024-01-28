@@ -1,94 +1,12 @@
 // ImageSquareModal.jsx
 import React, { useState } from "react";
 import styled from "styled-components";
+import { FaAngry, FaFrown, FaMeh, FaSmile, FaGrinHearts } from "react-icons/fa";
+import Carousel from "./Carousel";
 
-const ContainerBabyCard = styled.div`
-  display: flex;
-  flex-direction: start;
-  align-items: flex-start;
-`;
-
-// The image within the featured card
-const FeaturedImage = styled.img`
-  width: 100%;
-  max-width: 300px;
-  border-radius: 10px;
-  margin-top: -50px; // Adjust based on actual layout
-`;
-
-// Smaller baby cards for additional illustrations
-const BabyCard = styled.div`
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-// Baby thumbnail image
-const BabyThumbnail = styled.img`
-  width: 80px; // Adjust based on actual layout
-  height: 80px; // Adjust to maintain aspect ratio
-  border-radius: 10px;
-`;
-
-// Score slider container
-const ScoreSliderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-// Individual score slider
-const ScoreSlider = styled.input.attrs({ type: "range" })`
-  width: 100%;
-  margin: 8px 0;
-`;
+import RatingIcons from "./RatingIcons";
 
 // Interaction icon, assuming you're using a library like react-icons
-const InteractionIcon = styled.i`
-  font-size: 24px; // Adjust based on actual layout
-`;
-
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column; // Stack vertically on smaller screens
-  gap: 16px;
-  padding: 16px;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    flex-direction: row; // Row layout for larger screens
-    flex-wrap: wrap; // Wrap items if needed
-  }
-`;
-
-const LargeFeaturedCard = styled.div`
-  width: 100%;
-  height: 375px;
-  background: yellow; // Or any background you prefer
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px; // Space between this card and the ones below
-`;
-
-const KingContainer = styled.div`
-  display: flex;
-  background-color: pink;
-  justify-content: space-evenly;
-  width: 100%; // Full width of its parent
-  overflow: auto; // Scroll if content overflows
-`;
-const LeftSide = styled.div`
-  width: 100%; // Full width of its parent
-`;
-const RightSide = styled.div`
-  width: 100%; // Full width of its parent
-`;
 
 const ModalBackground = styled.div`
   display: ${({ show }) => (show ? "flex" : "none")};
@@ -101,100 +19,152 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  height: 80%;
-  width: 80%;
-  max-width: 960px;
-  overflow: hidden;
-`;
+  background: #fff;
+  padding: 24px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 80%; // Set the width to 80% of the viewport
 
-const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-`;
-
-const FeaturedCard = styled.div`
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-`;
-
-const LargeCard = styled.div`
-  width: 100%;
-  height: 375px;
-  background: yellow;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
+  gap: 20px;
+  overflow: auto; // Add scrollbar if content overflows
+  position: relative; // Needed for absolute positioning of children
+  max-width: 600px; // Optional, to ensure it doesn't get too wide on larger screens
+  max-height: 80vh; // Optional, to ensure it doesn't get too tall
 `;
 
 const InteractionButton = styled.button`
+  align-self: flex-end;
   background: none;
   border: none;
   cursor: pointer;
   font-size: 24px;
-  margin: 4px;
+`;
+
+const LargeCard = styled.div`
+  width: 100%;
+  height: 500px; // Adjust as needed
+  background: #f2f2f2; // Light gray background
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+`;
+
+const IconWrapper = styled.div`
+  cursor: pointer;
+  color: ${({ isSelected }) =>
+    isSelected ? "#007bff" : "#6c757d"}; // Use bootstrap colors for consistency
+  font-size: 36px; // Larger icons
+  transition: color 0.2s;
+
+  &:hover {
+    color: #0056b3; // Darker shade on hover
+  }
+`;
+
+const ScoreDisplay = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff; // Match the color with the selected icon
+  margin-top: 10px;
+`;
+
+const EmojiLabel = styled.div`
+  margin-top: 20px;
+`;
+const InteractionIcon = styled.i`
+  font-size: 24px; // Adjust based on actual layout
+`;
+
+const LabelMarkers = styled.div`
+  display: flex;
+  position: relative;
+  margin: 0 20px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px; // Adjust based on slider thumb size
+    right: 10px; // Adjust based on slider thumb size
+    height: 2px;
+    background: #ddd;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    z-index: -1;
+  }
+`;
+
+// Define your emojis by their shortcode (name) used by emoji-mart
+const icons = {
+  1: <FaAngry />,
+  2: <FaFrown />,
+  3: <FaMeh />,
+  4: <FaSmile />,
+  5: <FaGrinHearts />,
+};
+
+// Styled components
+const SliderContainer = styled.div`
+  margin: 30px;
+  text-align: center;
+`;
+
+const SliderInput = styled.input`
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 15px;
+
+  ::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    background: #f472b6;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  ::-moz-range-thumb {
+    width: 35px;
+    height: 35px;
+    background: #f472b6;
+    cursor: pointer;
+    border-radius: 50%;
+  }
 `;
 
 const ImageSquareModal = ({ show, onClose, children }) => {
+  const [carouselData, setCarouselData] = useState([]);
+
+  const handleFormSubmit = (formData) => {
+    setCarouselData([...carouselData, formData]);
+  };
+
   return (
     <ModalBackground show={show}>
       <ModalContainer>
-        {/* Placeholder for modal content; you can replace this with actual content */}
-        {children}
-
-        {/* Close button */}
         <InteractionButton onClick={onClose}>
           <InteractionIcon>✕</InteractionIcon>{" "}
-          {/* Replace with actual icon from library */}
-          <KingContainer>
-            {" "}
-            <LeftSide>
-              {" "}
-              <LargeFeaturedCard>
-                {/* Content for the large featured card */}
-              </LargeFeaturedCard>
-              <MainContainer>
-                <FeaturedCard>
-                  {/* Other content for the featured card like title, description, etc. */}
-                  {[...Array(8)].map(
-                    (
-                      _,
-                      index // Assuming you want to show 9 baby cards
-                    ) => (
-                      <BabyCard key={index}>
-                        <BabyThumbnail
-                          src={require("../assets/images/512x512.png")}
-                          alt="Featured Baby"
-                        />
-                        {/* Other content for each baby card like title, score, etc. */}
-                        <ScoreSliderContainer>
-                          <ScoreSlider />
-                        </ScoreSliderContainer>
-                      </BabyCard>
-                    )
-                  )}
-                </FeaturedCard>
-                {/* Example of smaller baby cards in a grid */}
-              </MainContainer>
-            </LeftSide>
-          </KingContainer>
         </InteractionButton>
+        <Carousel items={carouselData} />
       </ModalContainer>
     </ModalBackground>
   );
