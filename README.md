@@ -14,8 +14,12 @@ Judge-My-Baby
 │ │ └── ...
 │ ├── components
 │ │ ├── BabyForm.jsx
+│ │ ├── Carousel.jsx
 │ │ ├── Gallery.jsx
 │ │ ├── ImageSquare.jsx
+│ │ ├── ImageSquareModal.jsx
+│ │ ├── ParentComponent.jsx
+│ │ ├── RatingIcons.jsx
 │ │ └── ...
 │ ├── redux
 │ │ ├── actions
