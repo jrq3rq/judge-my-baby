@@ -102,7 +102,7 @@ const ImageSquare = ({ baby }) => {
   return (
     <>
       <Square>
-        <BabyIMG>{baby.projectName}</BabyIMG>
+        <BabyIMG>BABY IMAGE: {baby.projectName}</BabyIMG>
         {/* {baby.illustrationUrl && (
           <Image src={baby.illustrationUrl} alt={baby.character} />
         )} */}
