@@ -14,7 +14,7 @@ const CardContainer = styled.div`
 `;
 
 const Card = styled.div`
-  /* min-width: 300px; */
+  min-width: 300px;
   margin: 10px;
   padding: 20px;
   /* border: 1px solid #ccc; */
@@ -43,7 +43,7 @@ const CardCarousel = () => {
     },
     {
       projectName: "Attribute",
-      projectDescription: "Description of Project Attribute 2",
+      projectDescription: "Description of ProjectAttribute 2",
       // ... other project details
     },
     // ... more projects

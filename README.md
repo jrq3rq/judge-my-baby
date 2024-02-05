@@ -9,13 +9,22 @@ Judge-My-Baby
 │ │ ├── styles
 │ │ │ └── globalStyles.js # Global styled-components.
 │ │ └── images # Static images, icons, etc.
+│ ├── features
+│ │ ├── babyData
+│ │ │ └── babyDataSlice.js # Slice for baby data management.
+│ │ └── ... # Other feature slices can be added here.
 │ ├── pages
 │ │ ├── BabyDetailPage.jsx # Page to display a specific baby illustration.
 │ │ └── ...
 │ ├── components
 │ │ ├── BabyForm.jsx
+│ │ ├── Carousel.jsx
 │ │ ├── Gallery.jsx
 │ │ ├── ImageSquare.jsx
+│ │ ├── ImageSquareModal.jsx
+│ │ ├── ModalCard.jsx
+│ │ ├── ParentComponent.jsx
+│ │ ├── RatingIcons.jsx
 │ │ └── ...
 │ ├── redux
 │ │ ├── actions

@@ -18,7 +18,6 @@ const RatingsContainer = styled.div`
 const IconWrapper = styled.div`
   cursor: pointer;
   color: ${({ isSelected }) => (isSelected ? "#f472b6" : "#000")};
-
   margin: 0 5px;
   font-size: 24px;
 

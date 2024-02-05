@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import ImageSquare from "./ImageSquare";
+import { useSelector } from "react-redux";
 
 const PlaceholderSquare = styled.div`
   background-color: transparent; // No background color
@@ -46,29 +47,30 @@ const CreateButton = styled.button`
   &:hover {
     cursor: pointer;
     transform: translateY(-5px);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   }
 `;
 
 const Gallery = ({ babyData, onImageClick, onButtonClick }) => {
-  const numPlaceholders = 12;
+  const babies = useSelector((state) => state.babyData.babies);
+  // console.log(babies); // Log to see the data
+  console.log("Gallery Data:", babies);
+  const numPlaceholders = 11 - babies.length;
 
   return (
     <GalleryContainer>
       <CreateButton onClick={onButtonClick}>Create Your Baby</CreateButton>
-
-      {[...Array(numPlaceholders - 1)].map((_, index) => {
-        const baby = babyData[index];
-        return baby ? (
-          <ImageSquare
-            key={index + 1}
-            baby={baby}
-            onClick={() => onImageClick && onImageClick(baby)}
-          />
-        ) : (
-          <PlaceholderSquare key={index + 1} />
-        );
-      })}
+      {babies.map((baby, index) => (
+        <ImageSquare
+          key={index}
+          baby={baby}
+          onClick={() => onImageClick && onImageClick(baby)}
+        />
+      ))}
+      {[...Array(numPlaceholders)].map((_, index) => (
+        // Use a unique key for each placeholder to avoid React key warnings
+        <PlaceholderSquare key={`placeholder-${index}`} />
+      ))}
     </GalleryContainer>
   );
 };

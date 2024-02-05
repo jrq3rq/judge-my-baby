@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Gallery from "./components/Gallery";
 import BabyForm from "./components/BabyForm";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 const AppContainer = styled.div`
   margin: 0;
@@ -97,7 +96,7 @@ const CreateButton = styled.button`
   color: #494949;
   border: none;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #494949;
   /* border: 1px solid #494949; */
   cursor: pointer;
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
@@ -111,8 +110,11 @@ const CreateButton = styled.button`
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showForm, setShowForm] = useState(false); // State for showing the form
-  const [babyData, setBabyData] = useState([]);
-  const [submissions, setSubmissions] = useState([]);
+  const [babyData, setBabyData] = useState([]); // This state might need adjustment based on your implementation in ParentComponent
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleForm = () => setShowForm(!showForm); // Toggles form visibility
+  // const [submissions, setSubmissions] = useState([]);
   const [selectedBaby, setSelectedBaby] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -124,14 +126,6 @@ const App = () => {
   const handleFormSubmit = (formData) => {
     setBabyData([...babyData, formData]);
     setShowForm(false); // Close the form after submission
-  };
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const toggleForm = () => {
-    setShowForm(!showForm); // Function to toggle the form's visibility
   };
 
   return (

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { addBabyData } from "../features/babyData/babyDataSlice";
 
 const FormContainer = styled.form`
   display: flex;
@@ -115,6 +117,28 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
   const [businessModel, setBusinessModel] = useState("");
   const [specificFeedback, setSpecificFeedback] = useState("");
 
+  const dispatch = useDispatch();
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const formData = {
+  //     character,
+  //     projectName,
+  //     projectDescription,
+  //     projectURL,
+  //     targetAudience,
+  //     marketPotential,
+  //     problemSolution,
+  //     uniqueDifferentiators,
+  //     businessModel,
+  //     specificFeedback,
+  //   };
+  //   if (typeof onFormSubmit === "function") {
+  //     onFormSubmit(formData);
+  //   }
+  //   dispatch(addBabyData(formData));
+  //   toggleForm();
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -129,11 +153,33 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
       businessModel,
       specificFeedback,
     };
-    if (typeof onFormSubmit === "function") {
-      onFormSubmit(formData);
-    }
+
+    // Log formData to console to verify its structure and content
+    // console.log("Form Data:", formData);
+
+    dispatch(addBabyData(formData));
     toggleForm();
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const formData = {
+  //     character,
+  //     projectName,
+  //     projectDescription,
+  //     projectURL,
+  //     targetAudience,
+  //     marketPotential,
+  //     problemSolution,
+  //     uniqueDifferentiators,
+  //     businessModel,
+  //     specificFeedback,
+  //   };
+  //   if (typeof onFormSubmit === "function") {
+  //     onFormSubmit(formData);
+  //     console.log("Updated babyData in BabyForm:", formData); // Check the updated state
+  //   }
+  // };
 
   return (
     <ModalBackground show={showForm}>
@@ -252,7 +298,6 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
               Ruler - Authoritative, Influential, Powerful
             </option>
           </Select>
-
           <ButtonContainer>
             <PrimaryButton type="submit">Upload Creation</PrimaryButton>
             <SecondaryButton onClick={toggleForm}>Close</SecondaryButton>

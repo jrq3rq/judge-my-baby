@@ -1,27 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import babyDataReducer from "../features/babyData/babyDataSlice";
 
-// Initial state
-const initialState = {
-  babyData: [],
-};
-
-// Reducer function
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "ADD_BABY_DATA":
-      return {
-        ...state,
-        babyData: [...state.babyData, action.payload],
-      };
-    // Add other cases as needed
-    default:
-      return state;
-  }
-};
-
-// Create store using configureStore
 const store = configureStore({
-  reducer: reducer,
+  reducer: {
+    babyData: babyDataReducer,
+  },
 });
 
-export default store;
+export default store; // Change to default export

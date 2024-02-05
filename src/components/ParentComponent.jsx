@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 import BabyForm from "./BabyForm";
-import CardCarousel from "./CardCarousel"; // Ensure this import path is correct
+import ImageSquareModal from "./ImageSquareModal";
+import ImageSquare from "./ImageSquare";
 
 const ParentComponent = () => {
-  const [formDataArray, setFormDataArray] = useState([]);
+  const [babyData, setBabyData] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFormSubmit = (formData) => {
-    // Update formDataArray with the new formData
-    setFormDataArray([...formDataArray, formData]);
+    console.log("Received data in ParentComponent:", formData);
+    setBabyData(formData); // Here you save the form data into state
+    setIsModalOpen(true);
   };
 
   return (
     <div>
       <BabyForm onFormSubmit={handleFormSubmit} />
-      <CardCarousel formData={formDataArray} />
+      {babyData && <ImageSquare baby={babyData} />}
+      {/* Conditional rendering of ImageSquareModal */}
+      {isModalOpen && (
+        <ImageSquareModal
+          show={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          baby={babyData}
+        />
+      )}
     </div>
   );
 };
