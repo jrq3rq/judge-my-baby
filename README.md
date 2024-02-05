@@ -27,11 +27,6 @@ Judge-My-Baby
 │ │ ├── BabyDetailPage.jsx # Page to display a specific baby illustration.
 │ │ └── ...
 │ ├── redux
-│ │ ├── actions
-│ │ │ └── babyActions.js # Redux actions related to baby data management.
-│ │ ├── reducers
-│ │ │ ├── babyReducer.js # Reducer for baby data.
-│ │ │ └── index.js # Combine all reducers.
 │ │ └── store.js # Redux store configuration.
 │ ├── services
 │ │ └── api.js # Services for external API calls, e.g., to Firestore.
