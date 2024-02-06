@@ -10,100 +10,79 @@ const AppContainer = styled.div`
   width: 100%;
   position: relative;
 `;
-
 const Sidebar = styled.div`
-  display: flex; // Set the sidebar as a flex container
-  flex-direction: column; // Align items vertically
-  align-items: center; // Center items horizontally
-  gap: 15px; // Add a gap between items
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   position: fixed;
-  right: ${({ isOpen }) => (isOpen ? "0" : "-250px")};
+  right: ${({ isOpen }) =>
+    isOpen ? "0" : "-300px"}; /* Adjust width for smoother animation */
   top: 0;
-  width: 250px;
-  height: 100%;
-  /* background-color: #f3f3f3; */
-  background: linear-gradient(
+  width: 300px; /* Increased width for better visual */
+  height: 100vh; /* Full height */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  transition: right 0.5s ease-in-out; /* Smoother transition */
+  padding: 20px;
+  border-left: 1px solid #000;
+  background-color: #f472b6;
+
+  /* background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
     rgba(255, 255, 255, 0)
-  );
+  ); */
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(10px);
-  border-left: 1px solid #ccc;
-  /* border-left: 1px solid #494949; */
-  padding: 20px 0; // Add padding at the top and bottom
-  transition: right 0.3s ease;
-  z-index: 9;
-  @media screen and (max-width: 1080px) {
-    width: 220px;
-  }
-  @media screen and (max-width: 768px) {
-  }
-  @media screen and (max-width: 480px) {
-  }
+  z-index: 1000; /* High z-index to ensure it's above all other components */
 `;
 
 const CloseIcon = styled(FaTimes)`
-  color: #494949;
-  cursor: pointer;
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  z-index: 11;
-
-  &:hover {
-    color: #cccccc;
-  }
-  @media screen and (max-width: 1080px) {
-    top: 10px;
-    left: 5px;
-  }
+  align-self: flex-start; /* Align close icon to the start */
+  margin-bottom: 20px; /* Spacing */
 `;
 
 const ButtonsContainer = styled.div`
-  height: 90%;
+  display: flex;
+  flex-direction: column;
+  height: 92%;
+  width: 80%; /* Full width */
+  align-items: center;
+  gap: 10px;
+  /* border: 1px solid #ccc; */
   padding: 10px;
-  border-radius: 10px;
-  /* background-color: pink; */
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  /* border: 1px solid #494949; */
-  @media screen and (max-width: 480px) {
-    padding: 5px;
+  border-radius: 5px;
+`;
+
+const CreateButton = styled.button`
+  padding: 12px 20px;
+  color: #fff; /* Text color */
+  background-color: #f471b5;
+  border-radius: 5px;
+  width: 100%; /* Button width */
+  font-weight: 600; /* Bold text */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #f471b5;
+  &:hover {
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    border: 2px solid #000;
   }
 `;
 
 const IconButton = styled.div`
   position: fixed;
   top: 20px;
-  left: 20px;
-  color: #cccccc;
+  left: 10px;
+  color: #fff;
   /* color: #4caf50; */
   cursor: pointer;
   z-index: 10;
 
   &:hover {
-    color: #494949;
+    color: #000;
   }
   @media screen and (max-width: 480px) {
-  }
-`;
-
-const CreateButton = styled.button`
-  padding: 10px 15px;
-  background-color: #eeeeee;
-  /* background-color: #4caf50; */
-  color: #494949;
-  border: none;
-  border-radius: 5px;
-  border: 1px solid #494949;
-  /* border: 1px solid #494949; */
-  cursor: pointer;
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
-  transition: background-color 0.3s;
-  z-index: 10;
-  &:hover {
-    background-color: #cccccc;
   }
 `;
 
@@ -130,14 +109,17 @@ const App = () => {
 
   return (
     <AppContainer>
-      <IconButton onClick={toggleSidebar}>
-        {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-      </IconButton>
-
       <Sidebar isOpen={isSidebarOpen}>
-        <CloseIcon size={24} onClick={toggleSidebar} />
+        <IconButton onClick={toggleSidebar}>
+          {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        </IconButton>
         <ButtonsContainer>
-          <CreateButton>Dummy Button</CreateButton>
+          <CreateButton>Dashboard</CreateButton>
+          {/* <CreateButton>+ Submit New Project</CreateButton> */}
+          <CreateButton>My Babies </CreateButton>
+          {/* <CreateButton>Feedback Guidelines</CreateButton>
+          <CreateButton>Engagement Metrics </CreateButton>
+          <CreateButton>Settings & Support </CreateButton> */}
         </ButtonsContainer>
       </Sidebar>
       {showForm && (

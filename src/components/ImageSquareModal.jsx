@@ -16,12 +16,12 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background: #fff;
+  background-color: #fff;
+  border: 2px solid #f471b5;
   padding: 24px;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); */
   width: 80%; // Set the width to 80% of the viewport
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,8 +41,8 @@ const InteractionButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 24px;
-  background-color: pink;
   width: 100%;
+  top: 0;
 `;
 
 const ImageSquareModal = ({ show, onClose, baby }) => {

@@ -13,17 +13,18 @@ const InfoText = styled.div`
 const BabyIMG = styled.div`
   height: 150px;
   width: 150px;
-  border: 1px solid #494949; // Border color
+  border: 1px solid #f471b5; // Border color
   border-radius: 5px;
   margin-top: 10px;
   text-align: center;
 `;
 
 const Square = styled.div`
-  background-color: #eee; // Placeholder color for the square
-  border: 1px solid #494949; // Border color
+  background-color: transparent;
+  /* background-color: #f471b5; */
+  /* background-color: #eee;  */
+  border: 2px solid #f471b5; // Border color
   border-radius: 5px; // Rounded corners
-  cursor: pointer; // Cursor indicates it's clickable
   position: relative; // Needed for absolute positioning of children, if any
   overflow: hidden; // Ensures nothing overflows from the rounded corners
   aspect-ratio: 1 / 1; // Keeps the square aspect ratio
@@ -33,9 +34,9 @@ const Square = styled.div`
   justify-content: center; // Center children vertically
   transition: opacity 0.3s ease; // Smooth transition for hover effect
 
-  &:hover {
+  /* &:hover {
     opacity: 0.7; // Hover effect for the square
-  }
+  } */
 
   // Responsive adjustments if necessary
   @media (max-width: 768px) {
@@ -44,8 +45,19 @@ const Square = styled.div`
 `;
 
 const StyledButton = styled.button`
-  padding: 10px 20px;
+  padding: 12px 20px;
+  color: #fff; /* Text color */
+  background-color: #f471b5;
+  border-radius: 5px;
+  width: 80%; /* Button width */
+  font-weight: 600; /* Bold text */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #f471b5;
   cursor: pointer;
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    border: 1px solid #000;
+  }
 `;
 
 const ImageSquare = ({ baby }) => {
@@ -59,11 +71,11 @@ const ImageSquare = ({ baby }) => {
     <>
       <Square onClick={handleOpenModal}>
         {/* Display baby information */}
-        <BabyIMG>BABY IMAGE: {baby.projectName}</BabyIMG>
+        <BabyIMG>Baby Name: {baby.projectName}</BabyIMG>
         <InfoText>Character: {baby.character || "No character data"}</InfoText>
         {/* Other baby details */}
         <RatingIcons value={baby.rating || 0} onChange={() => {}} />
-        <StyledButton>Judge The Baby</StyledButton>
+        <StyledButton>Judge My Baby</StyledButton>
       </Square>
 
       {isModalOpen && (

@@ -61,9 +61,9 @@ const Button = styled.button`
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s;
   margin: 5px;
-  &:hover {
+  /* &:hover {
     background-color: #d0619f;
-  }
+  } */
 `;
 
 const Select = styled.select`
@@ -89,10 +89,11 @@ const ButtonContainer = styled.div`
 
 const PrimaryButton = styled(Button)`
   flex-grow: 7; // 70% of the space
-  background-color: #f472b6;
-
+  border: 2px solid #f471b5;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   &:hover {
-    background-color: #d0619f;
+    transform: translateY(-2px); /* Lift effect */
+    border: 2px solid #000;
   }
 `;
 
@@ -119,26 +120,6 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
 
   const dispatch = useDispatch();
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const formData = {
-  //     character,
-  //     projectName,
-  //     projectDescription,
-  //     projectURL,
-  //     targetAudience,
-  //     marketPotential,
-  //     problemSolution,
-  //     uniqueDifferentiators,
-  //     businessModel,
-  //     specificFeedback,
-  //   };
-  //   if (typeof onFormSubmit === "function") {
-  //     onFormSubmit(formData);
-  //   }
-  //   dispatch(addBabyData(formData));
-  //   toggleForm();
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
@@ -153,33 +134,11 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
       businessModel,
       specificFeedback,
     };
-
     // Log formData to console to verify its structure and content
     // console.log("Form Data:", formData);
-
     dispatch(addBabyData(formData));
     toggleForm();
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const formData = {
-  //     character,
-  //     projectName,
-  //     projectDescription,
-  //     projectURL,
-  //     targetAudience,
-  //     marketPotential,
-  //     problemSolution,
-  //     uniqueDifferentiators,
-  //     businessModel,
-  //     specificFeedback,
-  //   };
-  //   if (typeof onFormSubmit === "function") {
-  //     onFormSubmit(formData);
-  //     console.log("Updated babyData in BabyForm:", formData); // Check the updated state
-  //   }
-  // };
 
   return (
     <ModalBackground show={showForm}>
