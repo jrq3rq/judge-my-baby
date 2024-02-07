@@ -37,10 +37,13 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background: white;
+  background-color: #b8e4f9;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
 `;
 
 const Input = styled.input`
@@ -122,11 +125,18 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let formattedURL = projectURL;
+    if (
+      !projectURL.startsWith("http://") &&
+      !projectURL.startsWith("https://")
+    ) {
+      formattedURL = `https://${projectURL}`;
+    }
     const formData = {
       character,
       projectName,
       projectDescription,
-      projectURL,
+      projectURL: formattedURL, // Use the formatted URL
       targetAudience,
       marketPotential,
       problemSolution,
@@ -134,10 +144,21 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
       businessModel,
       specificFeedback,
     };
-    // Log formData to console to verify its structure and content
-    // console.log("Form Data:", formData);
     dispatch(addBabyData(formData));
     toggleForm();
+  };
+  const handleURLChange = (e) => {
+    setProjectURL(e.target.value);
+  };
+
+  const handleURLBlur = () => {
+    if (
+      projectURL &&
+      !projectURL.startsWith("http://") &&
+      !projectURL.startsWith("https://")
+    ) {
+      setProjectURL(`https://${projectURL}`);
+    }
   };
 
   return (
@@ -159,9 +180,10 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
           />
           <Input
             type="url"
-            placeholder="Project URL"
+            placeholder="https://example.com"
             value={projectURL}
-            onChange={(e) => setProjectURL(e.target.value)}
+            onChange={handleURLChange}
+            onBlur={handleURLBlur} // Format URL when input loses focus
           />
           <Select
             onChange={(e) => setTargetAudience(e.target.value)}
@@ -229,7 +251,7 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
             onChange={(e) => setCharacter(e.target.value)}
             value={character}
           >
-            <option value="">Select your baby archetype</option>
+            <option value="">Select your business archetype</option>
             <option value="Innocent">Innocent - Pure, Ethical, Trusted</option>
             <option value="Everyman">
               Everyman - Relatable, Down-to-Earth, Real
@@ -258,7 +280,7 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
             </option>
           </Select>
           <ButtonContainer>
-            <PrimaryButton type="submit">Upload Creation</PrimaryButton>
+            <PrimaryButton type="submit">Upload Baby</PrimaryButton>
             <SecondaryButton onClick={toggleForm}>Close</SecondaryButton>
           </ButtonContainer>
         </FormContainer>

@@ -16,7 +16,14 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  background-color: #fff;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  /* background-color: #fff; */
   border: 2px solid #f471b5;
   padding: 24px;
   border-radius: 15px;

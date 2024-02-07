@@ -3,20 +3,24 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ImageSquareModal from "./ImageSquareModal";
 import RatingIcons from "./RatingIcons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBabyCarriage } from "@fortawesome/free-solid-svg-icons"; // Example icon
+
+const HeaderText = styled.h1`
+  font-size: 18px; // Adjust as needed
+  text-transform: uppercase;
+`;
 
 const InfoText = styled.div`
   font-size: 12px; // Adjust as needed
   color: #333; // Adjust color as needed
-  margin: 5px 0; // Spacing between text elements
+  padding: 2px 0px; // Spacing between text elements
 `;
-
-const BabyIMG = styled.div`
-  height: 150px;
-  width: 150px;
-  border: 1px solid #f471b5; // Border color
-  border-radius: 5px;
-  margin-top: 10px;
-  text-align: center;
+const SubText = styled.div`
+  text-transform: uppercase;
+  font-size: 12px; // Adjust as needed
+  color: #333; // Adjust color as needed
+  padding: 2px 0px; // Spacing between text elements
 `;
 
 const Square = styled.div`
@@ -60,21 +64,49 @@ const StyledButton = styled.button`
   }
 `;
 
+const BabyIMG = styled.div`
+  height: 150px;
+  width: 150px;
+  border: 1px solid #f471b5; // Border color
+  border-radius: 5px;
+  margin-top: 10px;
+  display: flex; // Use flexbox for alignment
+  align-items: center; // Center vertically
+  justify-content: center; // Center horizontally
+`;
+
 const ImageSquare = ({ baby }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
+  // const archetypeColors = {
+  //   Rebel: "#F0822A",
+  //   Magician: "#F1AC2A",
+  //   Hero: "#FDE802",
+  //   Creator: "#362D93",
+  //   Ruler: "#0474BC",
+  //   Caregiver: "#00A6DF",
+  //   Innocent: "#1A7349",
+  //   Sage: "#35B276",
+  //   Explorer: "#A8CC67",
+  //   Lover: "#9F228F",
+  //   Joker: "#ED2F3E", // Assuming "Joker" is meant for "Jester"
+  //   Everyman: "#E70E7D",
+  // };
 
   return (
     <>
       <Square onClick={handleOpenModal}>
-        {/* Display baby information */}
-        <BabyIMG>Baby Name: {baby.projectName}</BabyIMG>
-        <InfoText>Character: {baby.character || "No character data"}</InfoText>
-        {/* Other baby details */}
-        <RatingIcons value={baby.rating || 0} onChange={() => {}} />
+        {/* Display the FaBaby icon */}
+        <BabyIMG>
+          <FontAwesomeIcon icon={faBabyCarriage} size="3x" />{" "}
+          {/* Adjust '3x' as needed */}
+        </BabyIMG>
+        <HeaderText>{baby.projectName || "Default Project Name"}</HeaderText>
+        <InfoText>Business Persona:</InfoText>
+        <SubText>{baby.character || "No character data"}</SubText>
         <StyledButton>Judge My Baby</StyledButton>
       </Square>
 
