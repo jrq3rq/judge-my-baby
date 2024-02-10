@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { useDispatch } from "react-redux";
 import { updateRating } from "../features/babyData/babyDataSlice"; // Adjust the import path as necessary
 import RatingIcons from "./RatingIcons";
 import { FaBaby } from "react-icons/fa"; // Import FaBaby icon
+import { useDispatch } from "react-redux";
 
 const ModalCardContainer = styled.div`
   background-color: #fff; // Bright and clean background
@@ -32,7 +32,10 @@ const BabyIMG = styled.div`
   margin-bottom: 20px; // Add some space below the icon
 
   svg {
-    fill: #f471b5; // Apply the theme color to the icon
+    fill: ${({ color }) =>
+      color || "#000"}; // Default to black if no color is provided
+    /* fill: #000; // Apply the theme color to the icon */
+    /* fill: #f471b5; // Apply the theme color to the icon */
     width: 80px; // Adjust icon size
     height: 80px;
   }
@@ -66,13 +69,15 @@ const ModalCard = ({ baby }) => {
     setIsDetailVisible(!isDetailVisible);
   };
 
+  // Function to handle the delete action
+
   if (!baby) {
     return <div>Loading...</div>;
   }
 
   return (
     <ModalCardContainer>
-      <BabyIMG>
+      <BabyIMG color={baby.color}>
         <FaBaby />
       </BabyIMG>
       <h3>{baby.projectName || "Default Project Name"}</h3>
@@ -80,9 +85,13 @@ const ModalCard = ({ baby }) => {
       {isDetailVisible && (
         <>
           <p>
-            URL: <a href={baby.projectURL}>{baby.projectURL}</a>
+            URL:{" "}
+            <a href={baby.projectURL} target="_blank" rel="noopener noreferrer">
+              {baby.projectURL}
+            </a>
+            {/* URL: <a href={baby.projectURL} target="_blank" rel="noopener noreferrer">{baby.projectURL}</a> */}
           </p>
-          <RatingIcons value={baby.rating} onChange={handleRatingChange} />
+          {/* <RatingIcons value={baby.rating} onChange={handleRatingChange} /> */}
         </>
       )}
       <DetailButton onClick={toggleDetails}>

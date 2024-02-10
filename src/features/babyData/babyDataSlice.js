@@ -1,28 +1,3 @@
-// import { createSlice, nanoid } from "@reduxjs/toolkit";
-
-// export const babyDataSlice = createSlice({
-//   name: "babyData",
-//   initialState: {
-//     babies: [],
-//   },
-//   reducers: {
-//     addBabyData: {
-//       reducer: (state, action) => {
-//         state.babies.push(action.payload);
-//       },
-//       prepare: (data) => {
-//         const id = nanoid(); // Generate a unique ID for each submission
-//         return { payload: { id, ...data } };
-//       },
-//     },
-//   },
-// });
-
-// export const { addBabyData } = babyDataSlice.actions;
-
-// export default babyDataSlice.reducer;
-
-// features/babyData/babyDataSlice.js
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 export const babyDataSlice = createSlice({
@@ -43,7 +18,6 @@ export const babyDataSlice = createSlice({
         },
       }),
     },
-    // Assuming you have a reducer to update the rating
     updateRating: (state, action) => {
       const { id, rating } = action.payload;
       const baby = state.babies.find((baby) => baby.id === id);
@@ -51,8 +25,12 @@ export const babyDataSlice = createSlice({
         baby.rating = rating;
       }
     },
+    deleteBaby: (state, action) => {
+      state.babies = state.babies.filter((baby) => baby.id !== action.payload);
+    },
   },
 });
 
-export const { addBabyData, updateRating } = babyDataSlice.actions;
+export const { addBabyData, updateRating, deleteBaby } = babyDataSlice.actions;
+
 export default babyDataSlice.reducer;

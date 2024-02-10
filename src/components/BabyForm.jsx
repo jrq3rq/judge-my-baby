@@ -134,6 +134,7 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
     }
     const formData = {
       character,
+      color, // Include this color in the formData
       projectName,
       projectDescription,
       projectURL: formattedURL, // Use the formatted URL
@@ -160,6 +161,22 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
       setProjectURL(`https://${projectURL}`);
     }
   };
+
+  const archetypeColors = {
+    Rebel: "#F0822A",
+    Magician: "#F1AC2A",
+    Hero: "#FDE802",
+    Creator: "#362D93",
+    Ruler: "#0474BC",
+    Caregiver: "#00A6DF",
+    Innocent: "#1A7349",
+    Sage: "#35B276",
+    Explorer: "#A8CC67",
+    Lover: "#9F228F",
+    Joker: "#ED2F3E", // Assuming "Joker" is meant for "Jester"
+    Everyman: "#E70E7D",
+  };
+  const color = archetypeColors[character] || "#defaultColor"; // Fallback color if none is found
 
   return (
     <ModalBackground show={showForm}>
@@ -251,32 +268,32 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
             onChange={(e) => setCharacter(e.target.value)}
             value={character}
           >
-            <option value="">Select your business archetype</option>
-            <option value="Innocent">Innocent - Pure, Ethical, Trusted</option>
-            <option value="Everyman">
-              Everyman - Relatable, Down-to-Earth, Real
-            </option>
-            <option value="Hero">Hero - Bold, Courageous, Strong</option>
-            <option value="Caregiver">
-              Caregiver - Nurturing, Supportive, Compassionate
-            </option>
-            <option value="Explorer">
-              Explorer - Adventurous, Independent, Pioneer
-            </option>
+            <option value="">Select your business persona</option>
             <option value="Rebel">
               Rebel - Disruptive, Edgy, Revolutionary
             </option>
-            <option value="Lover">Lover - Passionate, Sensual, Intimate</option>
-            <option value="Creator">
-              Creator - Innovative, Imaginative, Artistic
-            </option>
-            <option value="Jester">Joker - Fun, Humorous, Light-Hearted</option>
-            <option value="Sage">Sage - Wise, Knowledgeable, Advisor</option>
             <option value="Magician">
               Magician - Transformative, Visionary, Charismatic
             </option>
+            <option value="Hero">Hero - Bold, Courageous, Strong</option>
+            <option value="Creator">
+              Creator - Innovative, Imaginative, Artistic
+            </option>
             <option value="Ruler">
               Ruler - Authoritative, Influential, Powerful
+            </option>
+            <option value="Caregiver">
+              Caregiver - Nurturing, Supportive, Compassionate
+            </option>
+            <option value="Innocent">Innocent - Pure, Ethical, Trusted</option>
+            <option value="Sage">Sage - Wise, Knowledgeable, Advisor</option>
+            <option value="Explorer">
+              Explorer - Adventurous, Independent, Pioneer
+            </option>
+            <option value="Lover">Lover - Passionate, Sensual, Intimate</option>
+            <option value="Joker">Joker - Fun, Humorous, Light-Hearted</option>
+            <option value="Everyman">
+              Everyman - Relatable, Down-to-Earth, Real
             </option>
           </Select>
           <ButtonContainer>

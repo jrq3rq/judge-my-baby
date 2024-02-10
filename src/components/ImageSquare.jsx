@@ -1,10 +1,13 @@
-// components/ImageSquare.jsx
 import React, { useState } from "react";
 import styled from "styled-components";
 import ImageSquareModal from "./ImageSquareModal";
 import RatingIcons from "./RatingIcons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBabyCarriage } from "@fortawesome/free-solid-svg-icons"; // Example icon
+import { faBabyCarriage } from "@fortawesome/free-solid-svg-icons";
+import { updateRating } from "../features/babyData/babyDataSlice";
+import { useDispatch } from "react-redux";
+
+import { FaBaby, FaSadCry } from "react-icons/fa";
 
 const HeaderText = styled.h1`
   font-size: 18px; // Adjust as needed
@@ -24,10 +27,12 @@ const SubText = styled.div`
 `;
 
 const Square = styled.div`
-  background-color: transparent;
+  background-color: ${({ color }) => color};
+  border: 1px solid #000;
   /* background-color: #f471b5; */
   /* background-color: #eee;  */
-  border: 2px solid #f471b5; // Border color
+
+  /* border: 2px solid #333; // Border color */
   border-radius: 5px; // Rounded corners
   position: relative; // Needed for absolute positioning of children, if any
   overflow: hidden; // Ensures nothing overflows from the rounded corners
@@ -51,12 +56,14 @@ const Square = styled.div`
 const StyledButton = styled.button`
   padding: 12px 20px;
   color: #fff; /* Text color */
-  background-color: #f471b5;
+  background-color: ${({ color }) => color};
+  /* background-color: #f471b5; */
   border-radius: 5px;
   width: 80%; /* Button width */
   font-weight: 600; /* Bold text */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #f471b5;
+  border: 1px solid #333;
+  /* border: 1px solid #f471b5; */
   cursor: pointer;
   &:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
@@ -65,49 +72,51 @@ const StyledButton = styled.button`
 `;
 
 const BabyIMG = styled.div`
-  height: 150px;
+  height: 100px;
   width: 150px;
-  border: 1px solid #f471b5; // Border color
+  background-color: ${({ color }) => color};
   border-radius: 5px;
   margin-top: 10px;
   display: flex; // Use flexbox for alignment
-  align-items: center; // Center vertically
-  justify-content: center; // Center horizontally
+  flex-direction: column; // Stack children in a vertical column
+  align-items: center; // Center vertically in the cross-axis
+  justify-content: center; // Center horizontally in the main-axis
+  svg {
+    fill: ${({ color }) => color}; // Dynamically set the icon color
+  }
 `;
 
 const ImageSquare = ({ baby }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch(); // Correct usage of useDispatch
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
-  // const archetypeColors = {
-  //   Rebel: "#F0822A",
-  //   Magician: "#F1AC2A",
-  //   Hero: "#FDE802",
-  //   Creator: "#362D93",
-  //   Ruler: "#0474BC",
-  //   Caregiver: "#00A6DF",
-  //   Innocent: "#1A7349",
-  //   Sage: "#35B276",
-  //   Explorer: "#A8CC67",
-  //   Lover: "#9F228F",
-  //   Joker: "#ED2F3E", // Assuming "Joker" is meant for "Jester"
-  //   Everyman: "#E70E7D",
-  // };
+
+  const handleRatingChange = (newRating) => {
+    dispatch(updateRating({ id: baby.id, rating: newRating })); // Corrected usage
+  };
+  const BabyMoodIcon = ({ rating }) => {
+    return rating >= 3 ? <FaBaby size={24} /> : <FaSadCry size={24} />;
+  };
 
   return (
     <>
-      <Square onClick={handleOpenModal}>
-        {/* Display the FaBaby icon */}
+      <Square color={baby.color}>
+        {" "}
+        {/* Pass dynamic color */}
         <BabyIMG>
-          <FontAwesomeIcon icon={faBabyCarriage} size="3x" />{" "}
-          {/* Adjust '3x' as needed */}
+          <BabyMoodIcon rating={baby.rating} />
+          <FontAwesomeIcon icon={faBabyCarriage} size="3x" />
         </BabyIMG>
-        <HeaderText>{baby.projectName || "Default Project Name"}</HeaderText>
-        <InfoText>Business Persona:</InfoText>
-        <SubText>{baby.character || "No character data"}</SubText>
-        <StyledButton>Judge My Baby</StyledButton>
+        {/* <HeaderText>{baby.projectName || "Default Project Name"}</HeaderText> */}
+        {/* <InfoText> Baby Persona:</InfoText> */}
+        {/* <SubText>{baby.character || "No character data"}</SubText> */}
+        <RatingIcons value={baby.rating} onChange={handleRatingChange} />
+        <StyledButton onClick={handleOpenModal} color={baby.color}>
+          Judge My Baby
+        </StyledButton>
       </Square>
 
       {isModalOpen && (
