@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBabyCarriage } from "@fortawesome/free-solid-svg-icons";
 import { updateRating } from "../features/babyData/babyDataSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { FaBaby, FaSadCry } from "react-icons/fa";
 
@@ -100,6 +101,12 @@ const ImageSquare = ({ baby }) => {
   const BabyMoodIcon = ({ rating }) => {
     return rating >= 3 ? <FaBaby size={24} /> : <FaSadCry size={24} />;
   };
+  const navigate = useNavigate(); // Initialize navigate function
+
+  const handleNavigate = () => {
+    // Navigate to a dynamic route based on the baby's id
+    navigate(`/baby/${baby.id}`);
+  };
 
   return (
     <>
@@ -114,6 +121,7 @@ const ImageSquare = ({ baby }) => {
         {/* <InfoText> Baby Persona:</InfoText> */}
         {/* <SubText>{baby.character || "No character data"}</SubText> */}
         <RatingIcons value={baby.rating} onChange={handleRatingChange} />
+        {/* <StyledButton onClick={handleNavigate} color={baby.color}> */}
         <StyledButton onClick={handleOpenModal} color={baby.color}>
           Judge My Baby
         </StyledButton>

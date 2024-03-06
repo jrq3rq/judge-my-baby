@@ -1,65 +1,30 @@
+// In pages/BabyDetailsPage.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getBabyById } from "../services/api";
+import { useSelector } from "react-redux";
 
-const BabyDetailPage = () => {
-  const { id } = useParams();
+const BabyDetailsPage = () => {
+  const { id } = useParams(); // Get the baby ID from the URL
+  const babies = useSelector((state) => state.babyData.babies); // Fetch all babies from Redux
   const [baby, setBaby] = useState(null);
 
   useEffect(() => {
-    const fetchBaby = async () => {
-      const babyData = await getBabyById(id);
-      setBaby(babyData);
-    };
+    // Find the baby with the matching ID
+    const foundBaby = babies.find((b) => b.id === id);
+    setBaby(foundBaby);
+  }, [id, babies]);
 
-    fetchBaby();
-  }, [id]);
+  if (!baby) {
+    return <div>Loading baby details...</div>;
+  }
 
   return (
     <div>
-      {baby && (
-        <div>
-          <h1>{baby.projectName}</h1>
-          <img
-            src={baby.illustrationUrl}
-            alt={baby.character}
-            style={{ maxWidth: "100%" }}
-          />
-          <p>
-            <strong>Description:</strong> {baby.projectDescription}
-          </p>
-          <p>
-            <strong>Character:</strong> {baby.character}
-          </p>
-          <p>
-            <strong>Target Audience:</strong> {baby.targetAudience}
-          </p>
-          <p>
-            <strong>Market Potential:</strong> {baby.marketPotential}
-          </p>
-          <p>
-            <strong>Problem/Solution:</strong> {baby.problemSolution}
-          </p>
-          <p>
-            <strong>Unique Differentiators:</strong>{" "}
-            {baby.uniqueDifferentiators}
-          </p>
-          <p>
-            <strong>Business Model:</strong> {baby.businessModel}
-          </p>
-          <p>
-            <strong>Specific Feedback Requested:</strong>{" "}
-            {baby.specificFeedback}
-          </p>
-          {baby.projectURL && (
-            <a href={baby.projectURL} target="_blank" rel="noopener noreferrer">
-              Visit Project
-            </a>
-          )}
-        </div>
-      )}
+      <h1>{baby.projectName}</h1>
+      <p>{baby.projectDescription}</p>
+      {/* Display other baby details here */}
     </div>
   );
 };
 
-export default BabyDetailPage;
+export default BabyDetailsPage;

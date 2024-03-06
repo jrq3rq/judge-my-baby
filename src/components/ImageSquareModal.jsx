@@ -4,6 +4,7 @@ import ModalCard from "./ModalCard";
 import { FaTrashAlt, FaTimes } from "react-icons/fa";
 import { deleteBaby } from "../features/babyData/babyDataSlice";
 import { useDispatch } from "react-redux";
+import ProjectEvaluation from "./ProjectEvaluation";
 
 // Animation for modal appearance
 const fadeIn = keyframes`

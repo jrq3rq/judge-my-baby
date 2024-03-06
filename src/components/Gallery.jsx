@@ -76,7 +76,7 @@ const Gallery = ({ babyData, onImageClick, onButtonClick }) => {
   const babies = useSelector((state) => state.babyData.babies);
   // console.log(babies); // Log to see the data
   console.log("Gallery Data:", babies);
-  const numPlaceholders = 11 - babies.length;
+  const numPlaceholders = 7 - babies.length;
 
   return (
     <GalleryContainer>
