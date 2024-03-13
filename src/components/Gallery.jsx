@@ -8,7 +8,9 @@ import Navbar from "./Navbar";
 
 const PlaceholderSquare = styled.div`
   background-color: transparent; // No background color
-  border: 1px dashed #f471b5;
+  /* border: 1px dashed #f471b5; */
+  border: 8px dashed #1a1a1a;
+  /* border: 1px dashed #f471b5; */
   border-radius: 5px;
   aspect-ratio: 1 / 1; // Maintain square aspect ratio
   display: flex;

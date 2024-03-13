@@ -8,9 +8,11 @@ const Nav = styled.nav`
   display: flex;
   justify-content: flex-end; // Align items to the right
   align-items: center;
-  background-color: #f8f9fa; // A light grey background
-  border: 1px solid #cccccc;
-  padding: 0.5rem 0rem; // Add some padding around
+  /* background-color: #1A1A1A; // A light grey background */
+  /* background-color: #f8f9fa; // A light grey background */
+  /* border: 4px solid #1a1a1a; */
+  /* border: 1px solid #cccccc; */
+  padding: 0.2rem 0rem; // Add some padding around
   border-radius: 8px;
   margin-top: 20px;
   margin-right: 60px;
@@ -25,10 +27,11 @@ const Nav = styled.nav`
 `;
 
 const SortSelect = styled.select`
-  margin-right: 10px;
+  margin-right: 4px;
   padding: 8px 12px;
   border-radius: 4px;
-  border: 1px solid #cccccc;
+  border: 4px solid #1a1a1a;
+  /* border: 1px solid #cccccc; */
   background-color: white;
   cursor: pointer;
   outline: none;
@@ -36,11 +39,11 @@ const SortSelect = styled.select`
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
   &:hover {
-    border-color: #bbbbbb;
+    border-color: #1a1a1a;
   }
 
   &:focus {
-    border-color: #aaaaaa;
+    border-color: #1a1a1a;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 `;
