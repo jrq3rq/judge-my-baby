@@ -50,25 +50,32 @@ const Square = styled.div`
 
   // Responsive adjustments if necessary
   @media (max-width: 768px) {
-    // Adjustments for smaller screens go here
   }
 `;
 
 const StyledButton = styled.button`
   padding: 12px 20px;
   color: #fff; /* Text color */
-  background-color: ${({ color }) => color};
-  /* background-color: #f471b5; */
+  background-color: ${({ color }) => color}; /* Dynamic background color */
   border-radius: 5px;
-  width: 80%; /* Button width */
+  width: 80%; /* Adjust width as needed */
   font-weight: 600; /* Bold text */
+  font-size: 1rem; /* Default font size */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   border: 1px solid #333;
-  /* border: 1px solid #f471b5; */
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
-    border: 1px solid #000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+    border: 1px solid #000; /* Border color change on hover */
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 15px; /* Smaller padding for smaller screens */
+    font-size: 0.65rem; /* Smaller font size for mobile screens */
+    margin-bottom: 10px;
   }
 `;
 
@@ -78,12 +85,43 @@ const BabyIMG = styled.div`
   background-color: ${({ color }) => color};
   border-radius: 5px;
   margin-top: 10px;
-  display: flex; // Use flexbox for alignment
-  flex-direction: column; // Stack children in a vertical column
-  align-items: center; // Center vertically in the cross-axis
-  justify-content: center; // Center horizontally in the main-axis
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    height: 80px; /* Adjust size */
+    width: 120px;
+    svg {
+      font-size: 2rem; /* Adjust icon size */
+    }
+  }
+`;
+
+const RatingIconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Assuming RatingIcons renders individual icons that can be targeted with CSS
+  // Adjust the size of icons within RatingIcons based on screen width
   svg {
-    fill: ${({ color }) => color}; // Dynamically set the icon color
+    width: 24px; // Default size
+    height: 24px; // Default size
+    @media (max-width: 768px) {
+      width: 16px; // Smaller size for small screens
+      height: 16px; // Smaller size for small screens
+    }
+  }
+`;
+
+const Icon = styled.svg`
+  width: 24px;
+  height: 24px;
+
+  @media (max-width: 768px) {
+    width: 16px;
+    height: 16px;
   }
 `;
 
@@ -120,7 +158,9 @@ const ImageSquare = ({ baby }) => {
         {/* <HeaderText>{baby.projectName || "Default Project Name"}</HeaderText> */}
         {/* <InfoText> Baby Persona:</InfoText> */}
         {/* <SubText>{baby.character || "No character data"}</SubText> */}
-        <RatingIcons value={baby.rating} onChange={handleRatingChange} />
+        <RatingIconWrapper>
+          <RatingIcons value={baby.rating} onChange={handleRatingChange} />
+        </RatingIconWrapper>
         {/* <StyledButton onClick={handleNavigate} color={baby.color}> */}
         <StyledButton onClick={handleOpenModal} color={baby.color}>
           Judge My Baby

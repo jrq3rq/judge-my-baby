@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; // Import useEffect
 import styled from "styled-components";
 import ImageSquare from "./ImageSquare";
 import { useSelector } from "react-redux";
 import { FaBaby } from "react-icons/fa";
 import babyImage from "../assets/images/DalleIMG4.png";
+import Navbar from "./Navbar";
 
 const PlaceholderSquare = styled.div`
   background-color: transparent; // No background color
@@ -72,30 +73,51 @@ const CreateButton = styled.button`
   }
 `;
 
-const Gallery = ({ babyData, onImageClick, onButtonClick }) => {
+const Gallery = ({ onImageClick, onButtonClick }) => {
+  const [selectedArchetype, setSelectedArchetype] = useState("");
   const babies = useSelector((state) => state.babyData.babies);
-  // console.log(babies); // Log to see the data
-  console.log("Gallery Data:", babies);
-  const numPlaceholders = 7 - babies.length;
+
+  // Filter babies based on the selected archetype (not character)
+  const filteredBabies = selectedArchetype
+    ? babies.filter(
+        (baby) =>
+          baby.character &&
+          baby.character.toLowerCase() === selectedArchetype.toLowerCase()
+      )
+    : babies;
+
+  // Adjust the number of placeholders based on filtered results
+  const adjustedNumPlaceholders = Math.max(0, 7 - filteredBabies.length);
+
+  // Debugging: Log each baby's id and archetype
+  useEffect(() => {
+    console.log("Logging babies and their archetypes:");
+    babies.forEach((baby) => {
+      console.log(baby.id, baby.archetype);
+    });
+  }, [babies]); // Re-run the effect only if the babies array changes
 
   return (
-    <GalleryContainer>
-      <CreateButton onClick={onButtonClick} aria-label="Create Your Baby">
-        <BabyImage src={babyImage} alt="Create new baby project" />
-      </CreateButton>
+    <>
+      <Navbar onArchetypeSelect={setSelectedArchetype} babies={babies} />
 
-      {babies.map((baby, index) => (
-        <ImageSquare
-          key={index}
-          baby={baby}
-          onClick={() => onImageClick && onImageClick(baby)}
-        />
-      ))}
-      {[...Array(numPlaceholders)].map((_, index) => (
-        // Use a unique key for each placeholder to avoid React key warnings
-        <PlaceholderSquare key={`placeholder-${index}`} />
-      ))}
-    </GalleryContainer>
+      <GalleryContainer>
+        <CreateButton onClick={onButtonClick} aria-label="Create Your Baby">
+          <BabyImage src={babyImage} alt="Create new baby project" />
+        </CreateButton>
+        {filteredBabies.map((baby, index) => (
+          <ImageSquare
+            key={index}
+            baby={baby}
+            onClick={() => onImageClick && onImageClick(baby)}
+          />
+        ))}
+        {/* Render placeholders only if needed */}
+        {[...Array(adjustedNumPlaceholders)].map((_, index) => (
+          <PlaceholderSquare key={`placeholder-${index}`} />
+        ))}
+      </GalleryContainer>
+    </>
   );
 };
 
