@@ -29,10 +29,9 @@ const SubText = styled.div`
 
 const Square = styled.div`
   background-color: ${({ color }) => color};
-  border: 1px solid #000;
+  border: 2px solid #000;
   /* background-color: #f471b5; */
   /* background-color: #eee;  */
-
   /* border: 2px solid #333; // Border color */
   border-radius: 5px; // Rounded corners
   position: relative; // Needed for absolute positioning of children, if any
@@ -62,14 +61,13 @@ const StyledButton = styled.button`
   font-weight: 600; /* Bold text */
   font-size: 1rem; /* Default font size */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #333;
+  border: 2px solid #000000;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-top: 20px;
   &:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
-    border: 1px solid #000; /* Border color change on hover */
   }
 
   @media (max-width: 768px) {
@@ -88,7 +86,6 @@ const BabyIMG = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
   @media (max-width: 768px) {
     height: 80px; /* Adjust size */
     width: 120px;
@@ -149,7 +146,6 @@ const ImageSquare = ({ baby }) => {
   return (
     <>
       <Square color={baby.color}>
-        {" "}
         {/* Pass dynamic color */}
         <BabyIMG>
           <BabyMoodIcon rating={baby.rating} />

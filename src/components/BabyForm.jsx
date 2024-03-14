@@ -9,13 +9,6 @@ const FormContainer = styled.form`
   padding: 20px;
   position: sticky;
   bottom: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0)
-  );
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid #cccccc;
   /* background: rgba(255, 250, 250, 0.95); */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -30,14 +23,22 @@ const ModalBackground = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); // Dimmed background
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5);
   align-items: center;
   justify-content: center;
   z-index: 20;
 `;
 
 const ModalContainer = styled.div`
-  background-color: #b8e4f9;
+  background-color: #fff;
+  border: 2px solid #f471b5;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -91,21 +92,25 @@ const ButtonContainer = styled.div`
 `;
 
 const PrimaryButton = styled(Button)`
-  flex-grow: 7; // 70% of the space
-  border: 2px solid #f471b5;
+  flex-grow: 8; // 70% of the space
+  /* border: 2px solid #f471b5; */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   &:hover {
-    transform: translateY(-2px); /* Lift effect */
-    border: 2px solid #000;
+    transform: translateY(-2px);
+    border: 1px solid #cccccc;
+    background-color: #b8e4f9;
+    color: #000;
   }
 `;
 
 const SecondaryButton = styled(Button)`
-  flex-grow: 3; // 30% of the space
-  background-color: #6b7280;
-
+  flex-grow: 2; // 30% of the space
+  background-color: #f471b5;
+  border: 1px solid #f471b5;
   &:hover {
-    background-color: #4b5563;
+    background-color: #b8e4f9;
+    border: 1px solid #cccccc;
+    color: #000;
   }
 `;
 

@@ -36,7 +36,7 @@ const ModalBackground = styled.div`
 const ModalContainer = styled.div`
   background: #fff;
   border: 2px solid #f471b5; // Retain the brand color for consistency
-  padding: 24px;
+  padding: 34px;
   border-radius: 15px;
   width: 80%;
   display: flex;
@@ -53,8 +53,8 @@ const ModalContainer = styled.div`
 
 const InteractionButton = styled(FaTimes)`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
   color: #333;
   font-size: 24px;
@@ -63,12 +63,18 @@ const InteractionButton = styled(FaTimes)`
   &:hover {
     color: #f471b5; // Highlight on hover for intuitive feedback
   }
+
+  @media (max-width: 768px) {
+    top: 5px; // Adjust for smaller screens
+    right: 5px; // Adjust for smaller screens
+    font-size: 20px; // Optionally adjust size for smaller screens
+  }
 `;
 
 const DeleteIcon = styled(FaTrashAlt)`
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 10px;
   cursor: pointer;
   color: #f471b5; // Brand color for consistency
   font-size: 24px;

@@ -71,18 +71,30 @@ const ContentRow = styled.div`
 
 const Column = styled.div`
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   &:not(:last-child) {
     border-right: 1px solid #ccc;
   }
+
   &:nth-child(1) {
-    flex: 20%;
+    flex: 1;
   }
+
   &:nth-child(2) {
-    flex: 80%;
+    flex: 3;
   }
-  /* &:nth-child(3) {
-    flex: 15%;
-  } */
+
+  @media (max-width: 768px) {
+    flex: 1 1 100%;
+    border-right: none;
+    padding: 10px;
+    &:not(:last-child) {
+      border-bottom: 1px solid #ccc;
+    }
+  }
 `;
 
 const Section = styled.div`
@@ -106,6 +118,9 @@ const Text = styled.div`
   word-break: break-word; // Ensures words break to prevent overflow
   overflow: visible; // Text is visible outside the box (optional, can be removed)
   margin-top: 20px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const HighlightableText = styled.div`
@@ -150,58 +165,12 @@ const ModalCard = ({ baby }) => {
         <Column>
           <Section key={baby.id}>
             <Header>{baby.projectName}</Header>
-            <Text>
-              {baby.projectDescription} Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Voluptates fuga magnam, unde cumque quas
-              deserunt quos nemo commodi repudiandae! Sunt enim vel totam et
-              voluptatem aliquid quas ipsam libero incidunt odit laborum
-              officiis soluta mollitia molestias, consequuntur fuga nesciunt
-              molestiae. Consequuntur, perferendis. Eos eius, corrupti
-              accusantium consectetur soluta ipsum? Eligendi ex nam nobis
-              tenetur quisquam corporis nulla aut sit, quidem iste quam
-              voluptate? Et non, magni numquam minima distinctio fugiat aliquid
-              soluta placeat voluptatibus voluptatum explicabo, accusamus, hic
-              fuga sapiente provident repellat! Officiis obcaecati voluptate.
-            </Text>
+            <Text>{baby.projectDescription}</Text>
             <BabyIMG color={baby.color}>
               <FaBaby />
             </BabyIMG>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-              eveniet, voluptates dolor culpa dolores ipsa atque qui unde iste,
-              eligendi ad animi commodi maiores accusantium blanditiis, mollitia
-              vel officiis nostrum dolorum labore odio alias enim voluptate
-              quod! Est accusamus nostrum eaque ratione beatae debitis porro
-              perferendis eum dignissimos inventore laboriosam maxime modi
-              dolores rem perspiciatis officiis impedit deleniti quae
-              praesentium, adipisci accusantium dolore voluptate nihil
-              assumenda? Amet, natus facilis dolor omnis ratione eius nobis
-              porro? Inventore, aperiam ad. Esse exercitationem unde aliquid,
-              aliquam ipsam eveniet fuga corporis dolorum excepturi alias est,
-              numquam recusandae omnis! Explicabo a unde cumque aperiam,
-              consequuntur itaque, ad ipsum quidem tempore exercitationem sequi
-              laudantium aspernatur nam blanditiis vel velit ipsam, distinctio
-              praesentium dicta voluptatibus incidunt architecto eveniet? Eos
-              aperiam, fugit delectus hic ratione voluptas, esse voluptatibus
-              eius cum, odio nostrum aliquam voluptatum? Tempore quisquam, porro
-              odit molestias animi veritatis, nulla esse voluptates quasi
-              quaerat iste libero.
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio
-              exercitationem asperiores dolore, maxime repudiandae eligendi
-              voluptatem et. Necessitatibus magni autem explicabo quis est
-              voluptates excepturi nam ad illo culpa! Corrupti quos deserunt
-              odit sit. Consequatur, ipsa sit itaque consectetur distinctio
-              ducimus asperiores enim. Amet illum aperiam ipsum veritatis
-              voluptatem velit, quisquam officiis aliquam suscipit, ducimus
-              sequi dolorem facere deserunt numquam harum ad optio. Tempora
-              voluptate laborum eum, alias asperiores iure. Doloremque quos
-              beatae suscipit laborum omnis nemo tempore unde, provident
-              consequatur ut possimus, quis, sequi odio blanditiis impedit quo
-              sapiente harum veritatis architecto illo dolorum corrupti corporis
-              sed officia? Minus?
-            </Text>
+            <Text>{baby.projectDescription}</Text>
+            <Text>{baby.projectDescription}</Text>
           </Section>
         </Column>
       </ContentRow>
