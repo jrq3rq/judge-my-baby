@@ -28,12 +28,14 @@ const SubText = styled.div`
 `;
 
 const Square = styled.div`
-  background-color: ${({ color }) => color};
-  border: 2px solid #000;
+  background-color: #fff;
+  /* background-color: ${({ color }) => color}; */
+  border: 8px dashed ${({ color }) => color};
+  /* border: 2px solid #000; */
   /* background-color: #f471b5; */
   /* background-color: #eee;  */
   /* border: 2px solid #333; // Border color */
-  border-radius: 5px; // Rounded corners
+  border-radius: 8px; // Rounded corners
   position: relative; // Needed for absolute positioning of children, if any
   overflow: hidden; // Ensures nothing overflows from the rounded corners
   aspect-ratio: 1 / 1; // Keeps the square aspect ratio
@@ -61,7 +63,7 @@ const StyledButton = styled.button`
   font-weight: 600; /* Bold text */
   font-size: 1rem; /* Default font size */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 2px solid #000000;
+  /* border: 2px solid #000000; */
   display: flex;
   justify-content: center;
   align-items: center;

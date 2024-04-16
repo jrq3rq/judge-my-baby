@@ -187,15 +187,47 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
     <ModalBackground show={showForm}>
       <ModalContainer>
         <FormContainer onSubmit={handleSubmit}>
+          <Select
+            onChange={(e) => setCharacter(e.target.value)}
+            value={character}
+          >
+            <option value="">Persona</option>
+            <option value="Rebel">
+              Rebel - Disruptive, Edgy, Revolutionary
+            </option>
+            <option value="Magician">
+              Magician - Transformative, Visionary, Charismatic
+            </option>
+            <option value="Hero">Hero - Bold, Courageous, Strong</option>
+            <option value="Creator">
+              Creator - Innovative, Imaginative, Artistic
+            </option>
+            <option value="Ruler">
+              Ruler - Authoritative, Influential, Powerful
+            </option>
+            <option value="Caregiver">
+              Caregiver - Nurturing, Supportive, Compassionate
+            </option>
+            <option value="Innocent">Innocent - Pure, Ethical, Trusted</option>
+            <option value="Sage">Sage - Wise, Knowledgeable, Advisor</option>
+            <option value="Explorer">
+              Explorer - Adventurous, Independent, Pioneer
+            </option>
+            <option value="Lover">Lover - Passionate, Sensual, Intimate</option>
+            <option value="Joker">Joker - Fun, Humorous, Light-Hearted</option>
+            <option value="Everyman">
+              Everyman - Relatable, Down-to-Earth, Real
+            </option>
+          </Select>
           <Input
             type="text"
-            placeholder="Project Name"
+            placeholder=" Name"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
             required
           />
           <Textarea
-            placeholder="Project Description"
+            placeholder=" Description"
             value={projectDescription}
             onChange={(e) => setProjectDescription(e.target.value)}
             required
@@ -211,7 +243,7 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
             onChange={(e) => setTargetAudience(e.target.value)}
             value={targetAudience}
           >
-            <option value="">Select Target Audience</option>
+            <option value="">Target Audience</option>
             <option value="General Consumer">General Consumer</option>
             <option value="Businesses/Enterprises">
               Businesses/Enterprises
@@ -269,38 +301,7 @@ const BabyForm = ({ onFormSubmit, toggleForm, showForm }) => {
             value={specificFeedback}
             onChange={(e) => setSpecificFeedback(e.target.value)}
           />
-          <Select
-            onChange={(e) => setCharacter(e.target.value)}
-            value={character}
-          >
-            <option value="">Select your business persona</option>
-            <option value="Rebel">
-              Rebel - Disruptive, Edgy, Revolutionary
-            </option>
-            <option value="Magician">
-              Magician - Transformative, Visionary, Charismatic
-            </option>
-            <option value="Hero">Hero - Bold, Courageous, Strong</option>
-            <option value="Creator">
-              Creator - Innovative, Imaginative, Artistic
-            </option>
-            <option value="Ruler">
-              Ruler - Authoritative, Influential, Powerful
-            </option>
-            <option value="Caregiver">
-              Caregiver - Nurturing, Supportive, Compassionate
-            </option>
-            <option value="Innocent">Innocent - Pure, Ethical, Trusted</option>
-            <option value="Sage">Sage - Wise, Knowledgeable, Advisor</option>
-            <option value="Explorer">
-              Explorer - Adventurous, Independent, Pioneer
-            </option>
-            <option value="Lover">Lover - Passionate, Sensual, Intimate</option>
-            <option value="Joker">Joker - Fun, Humorous, Light-Hearted</option>
-            <option value="Everyman">
-              Everyman - Relatable, Down-to-Earth, Real
-            </option>
-          </Select>
+
           <ButtonContainer>
             <PrimaryButton type="submit">Upload Baby</PrimaryButton>
             <SecondaryButton onClick={toggleForm}>Close</SecondaryButton>

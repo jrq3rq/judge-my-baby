@@ -133,7 +133,7 @@ const HighlightableText = styled.div`
 
 const RatingRow = styled.div`
   width: 100%;
-  padding-top: 20px; // Space above the rating icons
+  padding: 20px; // Space above the rating icons
   border-top: 1px solid #ccc;
 `;
 const ModalCard = ({ baby }) => {
@@ -170,12 +170,11 @@ const ModalCard = ({ baby }) => {
               <FaBaby />
             </BabyIMG>
             <Text>{baby.projectDescription}</Text>
-            <Text>{baby.projectDescription}</Text>
           </Section>
         </Column>
       </ContentRow>
       <RatingRow>
-        <RatingIcons />
+        {/* <RatingIcons /> */} <Text>{baby.projectDescription}</Text>
       </RatingRow>
     </Container>
   );
