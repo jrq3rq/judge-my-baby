@@ -1,42 +1,52 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sortByNewest } from "../features/babyData/babyDataSlice"; // Ensure the correct import path
+import { signOut } from "firebase/auth";
+import { auth } from "../services/firebase";
+import { clearUser } from "../features/user/userSlice";
 
-// Styled components
+// Styled Components
 const Nav = styled.nav`
   display: flex;
-  justify-content: flex-end; // Align items to the right
+  flex-direction: row;
   align-items: center;
-  /* background-color: #1A1A1A; // A light grey background */
-  /* background-color: #f8f9fa; // A light grey background */
-  /* border: 4px solid #1a1a1a; */
-  /* border: 1px solid #cccccc; */
-  padding: 0.2rem 0rem; // Add some padding around
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  margin: 20px auto;
+  max-width: 100%;
+  width: 80%;
   border-radius: 8px;
-  margin-top: 20px;
-  margin-right: 60px;
-  margin-bottom: 20px;
-  margin-left: 60px;
+  /* background-color: #f8f9fa; */
+  /* border: 4px solid #1a1a1a; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+
   @media (max-width: 768px) {
-    margin-top: 20px;
-    margin-right: 35px;
-    margin-bottom: 20px;
-    margin-left: 35px;
+    width: 95%;
+    padding: 0.3rem 0.5rem;
+  }
+`;
+
+const Section = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @media (max-width: 768px) {
+    gap: 4px;
   }
 `;
 
 const SortSelect = styled.select`
-  margin-right: 4px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 4px solid #1a1a1a;
-  /* border: 1px solid #cccccc; */
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  border: 3px solid #1a1a1a;
   background-color: white;
   cursor: pointer;
   outline: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  font-size: 0.9rem;
 
   &:hover {
     border-color: #1a1a1a;
@@ -46,13 +56,69 @@ const SortSelect = styled.select`
     border-color: #1a1a1a;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.3em 0.8em;
+    font-size: 0.8rem;
+  }
+`;
+
+const EmailDisplay = styled.div`
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  border: 3px solid #1a1a1a;
+  background-color: #f471b5;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+
+  @media (max-width: 768px) {
+    padding: 0.3em 0.8em;
+    font-size: 0.8rem;
+  }
+`;
+
+const SignOutButton = styled.button`
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  border: 3px solid #1a1a1a;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  font-size: 0.9rem;
+
+  &:hover {
+    border-color: #1a1a1a;
+  }
+
+  &:focus {
+    border-color: #1a1a1a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.3em 0.8em;
+    font-size: 0.8rem;
+  }
 `;
 
 const Navbar = ({ onArchetypeSelect, babies }) => {
   const dispatch = useDispatch();
+  const userEmail = useSelector((state) => state.user.user?.email);
 
   const handleSortChange = (e) => {
     // Handle sort change
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      dispatch(clearUser());
+    } catch (error) {
+      console.error("Failed to sign out:", error);
+    }
   };
 
   // Extract unique character archetypes
@@ -67,17 +133,23 @@ const Navbar = ({ onArchetypeSelect, babies }) => {
 
   return (
     <Nav>
-      <SortSelect onChange={handleArchetypeChange}>
-        <option value="">Show All</option>
-        {uniqueArchetypes.map(
-          (archetype) =>
-            archetype && (
-              <option key={archetype} value={archetype.toLowerCase()}>
-                {archetype}
-              </option>
-            )
-        )}
-      </SortSelect>
+      <Section>
+        <SortSelect onChange={handleArchetypeChange}>
+          <option value="">Show All</option>
+          {uniqueArchetypes.map(
+            (archetype) =>
+              archetype && (
+                <option key={archetype} value={archetype.toLowerCase()}>
+                  {archetype}
+                </option>
+              )
+          )}
+        </SortSelect>
+      </Section>
+      <Section>
+        {userEmail && <EmailDisplay>{userEmail}</EmailDisplay>}
+        <SignOutButton onClick={handleSignOut}>Sign Out</SignOutButton>
+      </Section>
     </Nav>
   );
 };

@@ -59,6 +59,7 @@ const StyledButton = styled.button`
   color: #fff; /* Text color */
   background-color: ${({ color }) => color}; /* Dynamic background color */
   border-radius: 5px;
+  height: 80%;
   width: 80%; /* Adjust width as needed */
   font-weight: 600; /* Bold text */
   font-size: 1rem; /* Default font size */
@@ -67,7 +68,7 @@ const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   &:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
   }
@@ -75,7 +76,7 @@ const StyledButton = styled.button`
   @media (max-width: 768px) {
     padding: 8px 15px; /* Smaller padding for smaller screens */
     font-size: 0.65rem; /* Smaller font size for mobile screens */
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 `;
 
@@ -149,16 +150,16 @@ const ImageSquare = ({ baby }) => {
     <>
       <Square color={baby.color}>
         {/* Pass dynamic color */}
-        <BabyIMG>
+        {/* <BabyIMG>
           <BabyMoodIcon rating={baby.rating} />
           <FontAwesomeIcon icon={faBabyCarriage} size="3x" />
-        </BabyIMG>
+        </BabyIMG> */}
         {/* <HeaderText>{baby.projectName || "Default Project Name"}</HeaderText> */}
         {/* <InfoText> Baby Persona:</InfoText> */}
         {/* <SubText>{baby.character || "No character data"}</SubText> */}
-        <RatingIconWrapper>
+        {/* <RatingIconWrapper>
           <RatingIcons value={baby.rating} onChange={handleRatingChange} />
-        </RatingIconWrapper>
+        </RatingIconWrapper> */}
         {/* <StyledButton onClick={handleNavigate} color={baby.color}> */}
         <StyledButton onClick={handleOpenModal} color={baby.color}>
           Judge My Baby

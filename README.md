@@ -6,6 +6,9 @@ Judge-My-Baby
 │ └── index.html
 ├── src
 │ ├── assets
+│ │ ├── Auth
+│ │ │ ├── SignIn.jsx
+│ │ │ └── SignUp.jsx
 │ │ ├── styles
 │ │ │ └── globalStyles.js # Global styled-components.
 │ │ └── images # Static images, icons, etc.
@@ -29,7 +32,8 @@ Judge-My-Baby
 │ ├── redux
 │ │ └── store.js # Redux store configuration.
 │ ├── services
-│ │ └── api.js # Services for external API calls, e.g., to Firestore.
+│ │ ├── api.js # Services for external API calls, e.g., to Firestore.
+│ │ └── firebase.js
 │ ├── utils
 │ │ └── helpers.js # Utility functions, e.g., score-to-image mapping.
 │ ├── constants

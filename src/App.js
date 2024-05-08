@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { styled, createGlobalStyle } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser, clearUser } from "./features/user/userSlice";
 import Dashboard from "./pages/Dashboard";
-import HomePage from "./pages/Homepage";
+import SignIn from "./assets/Auth/SignIn";
+import { auth } from "./services/firebase";
 
 const AppContainer = styled.div`
   margin: 0;
@@ -19,24 +22,25 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
 
-  const handleSignIn = (credentials) => {
-    // Replace with your authentication logic
-    // If the user is authenticated:
-    setIsAuthenticated(true);
-  };
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch(setUser(authUser));
+      } else {
+        dispatch(clearUser());
+      }
+    });
+
+    return unsubscribe;
+  }, [dispatch]);
 
   return (
     <>
       <GlobalStyle />
-      <AppContainer>
-        {!isAuthenticated ? (
-          <HomePage onSignIn={handleSignIn} />
-        ) : (
-          <Dashboard />
-        )}
-      </AppContainer>
+      <AppContainer>{!user ? <SignIn /> : <Dashboard />}</AppContainer>
     </>
   );
 };

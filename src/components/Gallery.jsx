@@ -24,10 +24,9 @@ const GalleryContainer = styled.div`
   grid-template-columns: repeat(4, 1fr); // Adjust as per your layout
   grid-gap: 16px;
   padding: 16px;
-  margin: 40px 40px 40px 40px;
-
+  /* margin: 20px 20px; */
   @media (max-width: 1024px) {
-    margin: 40px 20px 40px 20px;
+    /* margin: 40px 20px 40px 20px; */
     grid-template-columns: repeat(3, 1fr); // Medium screens - 3 columns
   }
 
@@ -39,8 +38,8 @@ const GalleryContainer = styled.div`
 `;
 
 const BabyImage = styled.img`
-  max-width: 100%; // Ensure the image's width does not exceed the parent's width
-  max-height: 100%; // Ensure the image's height does not exceed the parent's height
+  max-width: 80%; // Ensure the image's width does not exceed the parent's width
+  max-height: 80%; // Ensure the image's height does not exceed the parent's height
   object-fit: cover; // Cover the parent's content box, might crop the image
   border-radius: 50%; // Optional: if you want the image to be circular
   display: block; // Remove any default inline spacing
@@ -59,7 +58,7 @@ const CreateButton = styled.button`
   transition: all 0.3s ease;
   background-color: #fff; // Default background
   &:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); // Elevate button on hover
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); // Elevate button on hover */
     &::after {
       transform: scale(1.5); // Enlarge the "+" sign
       color: #f471b5; // Change color to black on hover
@@ -102,7 +101,6 @@ const Gallery = ({ onImageClick, onButtonClick }) => {
   return (
     <>
       <Navbar onArchetypeSelect={setSelectedArchetype} babies={babies} />
-
       <GalleryContainer>
         <CreateButton onClick={onButtonClick} aria-label="Create Your Baby">
           <BabyImage src={babyImage} alt="Create new baby project" />
